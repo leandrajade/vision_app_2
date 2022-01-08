@@ -16,19 +16,27 @@ RSpec.describe "/users", type: :request do
   
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
+  
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {name: 'Leandra Jade Panopio',
+    username: 'leandrajade',
+    email: 'leandrajade@gmail.com',
+    password: 'password',}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {name: nil,
+    username: nil,
+    email: nil,}
   }
 
   describe "GET /index" do
     it "renders a successful response" do
-      User.create! valid_attributes
+      user = User.create! valid_attributes
       get users_url
       expect(response).to be_successful
+      expect(response.body).to include(user.name)
+      expect(response.body).to include(user.username)
     end
   end
 
@@ -37,6 +45,8 @@ RSpec.describe "/users", type: :request do
       user = User.create! valid_attributes
       get user_url(user)
       expect(response).to be_successful
+      expect(response.body).to include(user.name)
+      expect(response.body).to include(user.username)
     end
   end
 
@@ -78,7 +88,7 @@ RSpec.describe "/users", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post users_url, params: { user: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(422)
       end
     end
   end
@@ -86,14 +96,20 @@ RSpec.describe "/users", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: 'Meghan Ann Watson',
+          username: 'meghanann',
+          email: 'meghanannwatson@gmail.com',
+          password: 'password',
+        }
       }
 
       it "updates the requested user" do
         user = User.create! valid_attributes
         patch user_url(user), params: { user: new_attributes }
         user.reload
-        skip("Add assertions for updated state")
+        expect(user.name).to eq('Meghan Ann Watson')
+        expect(user.username).to eq('meghanann')
+        expect(user.email).to eq('meghanannwatson@gmail.com')
       end
 
       it "redirects to the user" do
@@ -108,7 +124,7 @@ RSpec.describe "/users", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         user = User.create! valid_attributes
         patch user_url(user), params: { user: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(422)
       end
     end
   end

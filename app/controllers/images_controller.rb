@@ -1,32 +1,36 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: %i[ show edit update destroy ]
 
+  before_action :get_user
+
   # GET /images or /images.json
   def index
-    @images = Image.all
+    @images = @user.images
   end
 
   # GET /images/1 or /images/1.json
   def show
+    @image = Image.find(params[:id])
   end
 
   # GET /images/new
   def new
-    @image = Image.new
+    @image = @user.images.build
   end
 
   # GET /images/1/edit
   def edit
+    @images = Image.find(params[:id])
   end
 
   # POST /images or /images.json
   def create
-    @image = Image.new(image_params)
+    @image = @user.images.build(image_params)
 
     respond_to do |format|
       if @image.save
-        format.html { redirect_to image_url(@image), notice: "Image was successfully created." }
-        format.json { render :show, status: :created, location: @image }
+        format.html { redirect_to user_path(@user.id), notice: "Image was successfully created." }
+        format.json { render :show, status: :created, location: user_image_path(@user.id, @image.id) }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @image.errors, status: :unprocessable_entity }
@@ -58,6 +62,9 @@ class ImagesController < ApplicationController
   end
 
   private
+    def get_user
+      @user = User.find(params[:user_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_image
       @image = Image.find(params[:id])

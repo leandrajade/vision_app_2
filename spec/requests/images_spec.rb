@@ -2,36 +2,44 @@
 
 RSpec.describe "/images", type: :request do
 
-  # let(:user) {User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com' )}
-  # let(:image) {Image.create(user_id: user.id, title: 'Holy Men', caption: 'Babê Çawîš, Êzîdî (Yezidi) Spiritual Leader. Photographed in Lalish temple, Iraq (Iraqi Kurdistan.)')}
+  let(:user) {User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com' )}
+  let(:image) {Image.create(user_id: user.id, title: 'Holy Men', caption: 'Babê Çawîš, Êzîdî (Yezidi) Spiritual Leader. Photographed in Lalish temple, Iraq (Iraqi Kurdistan.)')}
   
   # before do
-    
+  #   @user = User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com' )
+  #   @image = Image.create(user_id: @user, title: 'Holy Men', caption: 'Babê Çawîš, Êzîdî (Yezidi) Spiritual Leader. Photographed in Lalish temple, Iraq (Iraqi Kurdistan.)')
+  # end
+
+  # before do
+  #   sign_in create(:user)
   # end
   let(:valid_attributes) {
     {
-      user_id: user.id,
+      # user_id: User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com').id,
+      :user_id => User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com').id,
       title: 'Sample title',
       caption: 'Sample caption',
     }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    # skip("Add a hash of attributes invalid for your model")
   }
 
   describe "GET /index" do
     it "renders a successful response" do
       Image.create! valid_attributes
-      get images_url
+      get user_images_path(user.id)
       expect(response).to be_successful
     end
   end
 
+  # user_image GET    /users/:user_id/images/:id
   describe "GET /show" do
     it "renders a successful response" do
       image = Image.create! valid_attributes
-      get image_url(image)
+      get user_image_url(image)
+
       expect(response).to be_successful
     end
   end

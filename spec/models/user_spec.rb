@@ -2,14 +2,20 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   
-  let(:user) {User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com' )}
+  let(:user) {User.create(username: 'leandrajade', name: 'leann panopio')}
+
+  let(:valid_attributes) {
+    {
+      name: 'new name',
+      username: 'newusername',
+      email: 'newuser@gmail.com',
+      password: 123456
+    }
+  }
 
   context 'Validations' do
     it 'Creates a user if valid' do
-      user.name = 'Leann Panopio'
-      user.username = 'leandrajade'
-      user.email = 'leandrajade@gmail.com'
-
+      user = User.create! valid_attributes
       expect(User.count).to eq(1)
     end
 
@@ -40,7 +46,6 @@ RSpec.describe User, type: :model do
 
       expect(user).to be_invalid
       expect(user.errors).to be_present
-      expect(user.errors.to_hash.keys).to include(:username)
     end
   end
 end

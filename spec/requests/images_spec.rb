@@ -2,43 +2,42 @@
 
 RSpec.describe "/images", type: :request do
 
-  let(:user) {User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com' )}
-  let(:image) {Image.create(user_id: user.id, title: 'Holy Men', caption: 'Babê Çawîš, Êzîdî (Yezidi) Spiritual Leader. Photographed in Lalish temple, Iraq (Iraqi Kurdistan.)')}
-  
-  # before do
-  #   @user = User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com' )
-  #   @image = Image.create(user_id: @user, title: 'Holy Men', caption: 'Babê Çawîš, Êzîdî (Yezidi) Spiritual Leader. Photographed in Lalish temple, Iraq (Iraqi Kurdistan.)')
-  # end
+  before do 
+    sign_in create(:user)
+  end
 
-  # before do
-  #   sign_in create(:user)
-  # end
   let(:valid_attributes) {
     {
-      # user_id: User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com').id,
-      :user_id => User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com').id,
+      :user_id => User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com', password: 123456).id,
       title: 'Sample title',
       caption: 'Sample caption',
     }
   }
 
+
   let(:invalid_attributes) {
     # skip("Add a hash of attributes invalid for your model")
+
   }
+
+  
+  before(:each) do
+    @user = User.find(valid_attributes[:user_id])
+  end
+
 
   describe "GET /index" do
     it "renders a successful response" do
-      Image.create! valid_attributes
-      get user_images_path(user.id)
+      image = Image.create! valid_attributes
+      get user_images_path(@user, image)
       expect(response).to be_successful
     end
   end
 
-  # user_image GET    /users/:user_id/images/:id
   describe "GET /show" do
     it "renders a successful response" do
       image = Image.create! valid_attributes
-      get user_image_url(image)
+      get user_image_path(@user, image)
 
       expect(response).to be_successful
     end
@@ -46,7 +45,8 @@ RSpec.describe "/images", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_image_url
+      # image = Image.create! valid_attributes
+      get new_user_image_path(@user)
       expect(response).to be_successful
     end
   end
@@ -54,7 +54,7 @@ RSpec.describe "/images", type: :request do
   describe "GET /edit" do
     it "render a successful response" do
       image = Image.create! valid_attributes
-      get edit_image_url(image)
+      get edit_user_image_path(@user, image)
       expect(response).to be_successful
     end
   end
@@ -63,13 +63,13 @@ RSpec.describe "/images", type: :request do
     context "with valid parameters" do
       it "creates a new Image" do
         expect {
-          post images_url, params: { image: valid_attributes }
+          post user_images_url(@user), params: { image: valid_attributes }
         }.to change(Image, :count).by(1)
       end
 
       it "redirects to the created image" do
-        post images_url, params: { image: valid_attributes }
-        expect(response).to redirect_to(image_url(Image.last))
+        post user_images_url(@user), params: { image: valid_attributes }
+        expect(response).to redirect_to(user_path(@user))
       end
     end
 

@@ -10,5 +10,5 @@
   <%= @gallery.caption %>
 </p>
 
-<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
-<%= link_to 'Back', galleries_path %>
+<%= link_to 'Edit', edit_user_gallery_path(@user, @gallery) %> 
+<%= link_to 'Back', user_galleries_path(@user) %>

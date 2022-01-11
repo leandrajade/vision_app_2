@@ -20,9 +20,9 @@
         <td><%= image.title %></td>
         <td><%= image.caption %></td>
         <td><%= image.price %></td>
-        <%# <td><%= link_to 'Show', user_image_path(image) %></td> %>
-        <%# <td><%= link_to 'Edit', edit_user_image_path(image) %></td> %>
-        <%# <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' }%></td> %>
+        <td><%= link_to 'Show', user_image_path(@user, image) %></td>
+        <td><%= link_to 'Edit', edit_user_image_path(@user, image) %></td>
+        <td><%= link_to 'Destroy', user_image_path(@user, image), method: :delete, data: { confirm: 'Are you sure?' }%></td> 
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%# <%= link_to 'New Image', new_image_path %> %>
+<%= link_to 'New Image', new_user_image_path(@user) %>

@@ -8,4 +8,5 @@ class User < ApplicationRecord
     # validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
     
     has_many :images
+    has_many :galleries
 end

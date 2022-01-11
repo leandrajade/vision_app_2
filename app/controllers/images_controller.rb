@@ -1,6 +1,5 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: %i[ show edit update destroy ]
-
   before_action :get_user
 
   # GET /images or /images.json
@@ -29,7 +28,7 @@ class ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
-        format.html { redirect_to user_path(@user.id), notice: "Image was successfully created." }
+        format.html { redirect_to user_image_path(@user.id, @image), notice: "Image was successfully created." }
         format.json { render :show, status: :created, location: user_image_path(@user.id, @image.id) }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,13 +37,11 @@ class ImagesController < ApplicationController
     end
   end
 
-  # category_path(@category.id)
-
   # PATCH/PUT /images/1 or /images/1.json
   def update
     respond_to do |format|
       if @image.update(image_params)
-        format.html { redirect_to user_url(@user.id), notice: "Image was successfully updated." }
+        format.html { redirect_to user_image_path(@user.id, @image), notice: "Image was successfully updated." }
         format.json { render :show, status: :ok, location: @image }
       else
         format.html { render :edit, status: :unprocessable_entity }

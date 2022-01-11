@@ -9,15 +9,19 @@ RSpec.describe "/images", type: :request do
   let(:valid_attributes) {
     {
       :user_id => User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com', password: 123456).id,
-      title: 'Sample title',
-      caption: 'Sample caption',
+      :title => 'Sample title',
+      :caption => 'Sample caption',
     }
   }
 
 
   let(:invalid_attributes) {
-    # skip("Add a hash of attributes invalid for your model")
-
+    {
+      :user_id => nil,
+      :title => nil,
+      :caption => nil, 
+    }
+   
   }
 
   
@@ -45,7 +49,6 @@ RSpec.describe "/images", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
-      # image = Image.create! valid_attributes
       get new_user_image_path(@user)
       expect(response).to be_successful
     end
@@ -76,43 +79,48 @@ RSpec.describe "/images", type: :request do
     context "with invalid parameters" do
       it "does not create a new Image" do
         expect {
-          post images_url, params: { image: invalid_attributes }
+          post user_images_url(@user), params: { image: invalid_attributes }
         }.to change(Image, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
-        post images_url, params: { image: invalid_attributes }
-        expect(response).to be_successful
+      it "renders unprocessable entity" do
+        post user_images_url(@user), params: { image: invalid_attributes }
+        expect(response).to have_http_status(422)
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+      let(:new_attributes) { 
+        {
+          :user_id => User.create(username: 'leandrajade', name: 'leann panopio', email: 'leandrajade@gmail.com', password: 123456).id,
+          :title => 'Sample title',
+          :caption => 'Sample caption',
+        }
       }
 
       it "updates the requested image" do
-        image = Image.create! valid_attributes
-        patch image_url(image), params: { image: new_attributes }
+        image = Image.create! valid_attributes #creating a user to edit
+        patch user_image_url(@user, image), params: { image: new_attributes } 
         image.reload
-        skip("Add assertions for updated state")
+        expect(image.title).to eq('Sample title')
+        expect(image.caption).to eq('Sample caption')
       end
 
       it "redirects to the image" do
         image = Image.create! valid_attributes
-        patch image_url(image), params: { image: new_attributes }
+        patch user_image_path(@user, image), params: { image: new_attributes } 
         image.reload
-        expect(response).to redirect_to(image_url(image))
+        expect(response).to redirect_to(user_path(@user))
       end
     end
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         image = Image.create! valid_attributes
-        patch image_url(image), params: { image: invalid_attributes }
-        expect(response).to be_successful
+        patch user_image_url(@user, image), params: { image: invalid_attributes }
+        expect(response).to have_http_status(422)
       end
     end
   end
@@ -121,14 +129,14 @@ RSpec.describe "/images", type: :request do
     it "destroys the requested image" do
       image = Image.create! valid_attributes
       expect {
-        delete image_url(image)
+        delete user_image_path(@user, image)
       }.to change(Image, :count).by(-1)
     end
 
     it "redirects to the images list" do
       image = Image.create! valid_attributes
-      delete image_url(image)
-      expect(response).to redirect_to(images_url)
+      delete user_image_path(@user, image)
+      expect(response).to redirect_to(user_images_path)
     end
   end
 end

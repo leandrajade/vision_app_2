@@ -38,11 +38,13 @@ class ImagesController < ApplicationController
     end
   end
 
+  # category_path(@category.id)
+
   # PATCH/PUT /images/1 or /images/1.json
   def update
     respond_to do |format|
       if @image.update(image_params)
-        format.html { redirect_to image_url(@image), notice: "Image was successfully updated." }
+        format.html { redirect_to user_url(@user.id), notice: "Image was successfully updated." }
         format.json { render :show, status: :ok, location: @image }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,7 +58,7 @@ class ImagesController < ApplicationController
     @image.destroy
 
     respond_to do |format|
-      format.html { redirect_to images_url, notice: "Image was successfully destroyed." }
+      format.html { redirect_to user_images_url, notice: "Image was successfully destroyed." }
       format.json { head :no_content }
     end
   end

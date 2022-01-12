@@ -73,3 +73,4 @@ production:
   database: vision_app_production_2
   username: vision_app
   password: <%= ENV['VISION_APP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_11_110207) do
+ActiveRecord::Schema.define(version: 2022_01_12_055610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_01_11_110207) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "gallery_for_sale"
     t.index ["user_id"], name: "index_galleries_on_user_id"
   end
 
@@ -32,6 +33,8 @@ ActiveRecord::Schema.define(version: 2022_01_11_110207) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.boolean "for_sale"
+    t.string "picture"
     t.index ["user_id"], name: "index_images_on_user_id"
   end
 

@@ -59,6 +59,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def current_user_home
+    redirect_to current_user
+  end
+  
   private
 
     def get_user

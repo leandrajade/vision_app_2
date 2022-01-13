@@ -14,7 +14,7 @@ class ImagesController < ApplicationController
 
   # GET /images/new
   def new
-    @image = @user.images.build
+    @image = Image.new
   end
 
   # GET /images/1/edit
@@ -71,6 +71,6 @@ class ImagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def image_params
-      params.require(:image).permit(:user_id, :title, :caption, :price)
+      params.require(:image).permit(:user_id, :title, :caption, :picture, :price)
     end
 end

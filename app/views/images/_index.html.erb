@@ -9,6 +9,8 @@
       <th>Title</th>
       <th>Caption</th>
       <th>Price</th>
+      <th>Photo</th>
+      <th>On Market</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +22,8 @@
         <td><%= image.title %></td>
         <td><%= image.caption %></td>
         <td><%= image.price %></td>
+        <td><%= image.picture %></td>
+        <td><%= image.for_sale %></td>
         <td><%= link_to 'Show', user_image_path(@user, image) %></td>
         <td><%= link_to 'Edit', edit_user_image_path(@user, image) %></td>
         <td><%= link_to 'Destroy', user_image_path(@user, image), method: :delete, data: { confirm: 'Are you sure?' }%></td> 
@@ -30,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Image', new_user_image_path(@user) %>
+<%= link_to 'Upload', new_user_image_path(@user) %>

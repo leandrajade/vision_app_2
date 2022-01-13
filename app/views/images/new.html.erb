@@ -3,5 +3,34 @@
 
     <%# <%= render 'form', image: @image %> %>
 
+    <div class="field">
+        <%= f.label :user_id %>
+        <%= f.number_field :user_id %>
+    </div>
+
+    <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+        <%= f.label :caption %>
+        <%= f.text_field :caption %>
+    </div>
+
+    <div class="field">
+        <%= f.label :price %>
+        <%= f.number_field :price %>
+    </div>
+
+    <div class="field">
+        <%= f.label :picture %>
+        <%= f.file_field :picture%>
+    </div>
+
+    <div class="actions">
+        <%= f.submit %>
+    </div>
+
     <%= link_to 'Back', user_images_path %>
 <% end %>

@@ -1,4 +1,3 @@
-
 development:
   cloud_name: <%= ENV["cloud_name"] %>
   api_key: <%= ENV["api_key"] %>

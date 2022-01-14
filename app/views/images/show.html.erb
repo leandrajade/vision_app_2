@@ -20,5 +20,10 @@
   <%= @image.price %>
 </p>
 
+<p>
+  <strong>image:</strong>
+  <%= image_tag @image.img %>
+</p>
+
 <%= link_to 'Edit', edit_user_image_path(@image) %> 
 <%= link_to 'Back', @user %>

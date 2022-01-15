@@ -1,7 +1,6 @@
 <%= form_with model: [@user, @image],  local: true do |f| %>
     <h1>New Image</h1>
 
-    <%# <%= render 'form', image: @image %> %>
 
     <div class="field">
         <%= f.label :user_id %>
@@ -24,14 +23,9 @@
     </div>
 
     <div class="field">
-        <%= f.label :picture %>
-        <%= f.file_field :picture, accept: 'image/png,image/jpeg'%>
+        <%= f.label :img %>
+        <%= f.file_field :img %>
     </div>
-
-    <%# <%= form_with model: [@user, @image] do |f|%> %>
-        <%# <%= f.file_field :picture, accept: 'image/png,image/jpeg'%> %>
-    <%# <% end %> %>
-
 
     <div class="actions">
         <%= f.submit %>

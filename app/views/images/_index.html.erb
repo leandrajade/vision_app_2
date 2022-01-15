@@ -23,7 +23,7 @@
         <td><%= image.title %></td>
         <td><%= image.caption %></td>
         <td><%= image.price %></td>
-        <td><%= image.img %></td>
+        <td><%= image_tag image.img.to_s %></td>
         <td><%= image.for_sale %></td>
         <td><%= link_to 'Show', user_image_path(@user, image) %></td>
         <td><%= link_to 'Edit', edit_user_image_path(@user, image) %></td>

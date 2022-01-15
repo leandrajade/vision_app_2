@@ -22,7 +22,7 @@
 
 <p>
   <strong>image:</strong>
-  <%= image_tag @image.img %>
+  <%= image_tag @image.img.to_s %>
 </p>
 
 <%= link_to 'Edit', edit_user_image_path(@image) %> 

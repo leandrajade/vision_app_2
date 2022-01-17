@@ -9,7 +9,11 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @user = User.find(params[:id])
+    if current_user.id != params[:id].to_i
+      redirect_to "/users/#{current_user.id}"
+    end
+    
+    @user = User.find(current_user.id)
     @images = @user.images.order(created_at: :desc)
   end
 

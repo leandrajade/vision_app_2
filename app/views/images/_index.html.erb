@@ -5,7 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
+      <th>Id</th>
+      <th>Check</th>
       <th>Title</th>
       <th>Caption</th>
       <th>Price</th>
@@ -18,15 +19,16 @@
   <tbody>
     <% @images.each do |image| %>
       <tr>
+        
         <td><%= image.id %></td>
-        <td><%= image.user_id %></td>
+        <td><%= check_box_tag image.id %></td>
+        <td><%= image.title %></td>
         <td><%= image.title %></td>
         <td><%= image.caption %></td>
         <td><%= image.price %></td>
         <td><%= image_tag image.img.to_s %></td>
         <td><%= image.for_sale %></td>
         <td><%= link_to 'Show', user_image_path(@user, image) %></td>
-        <td><%= link_to 'Edit', edit_user_image_path(@user, image) %></td>
         <td><%= link_to 'Destroy', user_image_path(@user, image), method: :delete, data: { confirm: 'Are you sure?' }%></td> 
       </tr>
     <% end %>

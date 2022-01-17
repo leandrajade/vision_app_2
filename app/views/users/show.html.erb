@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Dasboard', dashboards_path %>
+<%= link_to 'My gallery', user_galleries_path(@user) %>
+
+<%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
 <p>
   <strong>Username:</strong>
   <%= @user.username %>
@@ -21,8 +27,3 @@
 </p>
 
 <%= render 'images/index' %>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-
-<%= button_to 'Sign out', destroy_user_session_path, method: :delete %>

@@ -1,6 +1,26 @@
 <h1>Editing Gallery</h1>
 
-<%# <%= render 'form', gallery: @gallery %> %>
+<%= form_with model: [@user, @gallery],  local: true do |f| %>
 
-<%= link_to 'Show', user_gallery_path(@user, @gallery)  %> |
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :caption %>
+    <%= f.text_field :caption %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gallery_price %>
+    <%= f.number_field :gallery_price %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
 <%= link_to 'Back', user_gallery_path %>

@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
 
   # GET /images or /images.json
   def index
-    @images = @user.images
+    @images = @user.images.order(created_at: :desc)
   end
 
   # GET /images/1 or /images/1.json
@@ -17,13 +17,9 @@ class ImagesController < ApplicationController
     @image = Image.new
   end
 
-  # GET /images/1/edit
-  def edit
-    @images = Image.find(params[:id])
-  end
-
   # POST /images or /images.json
   def create
+    image_params[:user_id] = current_user.id
     @image = @user.images.build(image_params)
 
     respond_to do |format|
@@ -37,25 +33,12 @@ class ImagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /images/1 or /images/1.json
-  def update
-    respond_to do |format|
-      if @image.update(image_params)
-        format.html { redirect_to user_image_path(@user.id, @image), notice: "Image was successfully updated." }
-        format.json { render :show, status: :ok, location: @image }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /images/1 or /images/1.json
   def destroy
     @image.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_images_url, notice: "Image was successfully destroyed." }
+      format.html { redirect_to user_path(@user), notice: "Image was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -71,6 +54,6 @@ class ImagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def image_params
-      params.require(:image).permit(:user_id, :title, :caption, :img, :for_sale, :price)
+      params.require(:image).permit(:title, :caption, :img, :for_sale, :price)
     end
 end

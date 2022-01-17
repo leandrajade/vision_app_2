@@ -14,7 +14,7 @@ class GalleriesController < ApplicationController
 
   # GET /galleries/new
   def new
-    # @gallery = @user.galleries.build
+    @gallery = @user.galleries.build
   end
 
   # GET /galleries/1/edit
@@ -24,6 +24,7 @@ class GalleriesController < ApplicationController
 
   # POST /galleries or /galleries.json
   def create
+    gallery_params[:user_id] = current_user.id
     @gallery = @user.galleries.build(gallery_params)
 
     respond_to do |format|
@@ -39,6 +40,7 @@ class GalleriesController < ApplicationController
 
   # PATCH/PUT /galleries/1 or /galleries/1.json
   def update
+    gallery_params[:user_id] = current_user.id
     respond_to do |format|
       if @gallery.update(gallery_params)
         format.html { redirect_to user_gallery_path(@user.id, @gallery), notice: "Gallery was successfully updated." }
@@ -62,7 +64,7 @@ class GalleriesController < ApplicationController
 
   private
     def get_user
-      @user = User.find(params[:user_id])
+      @user = User.find(current_user.id)
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_gallery
@@ -71,6 +73,6 @@ class GalleriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def gallery_params
-      params.require(:gallery).permit(:user_id, :title, :caption, :price)
+      params.require(:gallery).permit(:title, :caption, :gallery_price)
     end
 end

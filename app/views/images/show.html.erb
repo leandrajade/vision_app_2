@@ -25,5 +25,6 @@
   <%= image_tag @image.img.to_s %>
 </p>
 
-<%= link_to 'Edit', edit_user_image_path(@image) %> 
+<%= link_to 'Destroy', user_image_path(@user, @image), method: :delete, data: { confirm: 'Are you sure?' }%>
+
 <%= link_to 'Back', @user %>

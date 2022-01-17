@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'My profile', user_path(@user) %>
+<%= link_to 'New Gallery', new_user_gallery_path(@user) %>
+
 <h1>Galleries</h1>
 
 <table>
@@ -26,4 +29,3 @@
 
 <br>
 
-<%= link_to 'New Gallery', new_user_gallery_path(@user) %>

@@ -17,7 +17,23 @@
             colors: {
               black: '#1C1C1C',
               grey: '#B0B0B0',
-            }
+            },
+            animation: {
+              hue: "hue 6s infinite"
+            },
+            keyframes: {
+              hue: {
+                "33.33%": {
+                  transition: "text-red-400" ,
+                },
+                "66.66%": {
+                  transition: "text-blue-400",
+                },
+                "99.99%": {
+                  transition: "text-purple-400",
+                }
+              }
+            },
           }
         }
       }

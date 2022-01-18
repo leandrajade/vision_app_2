@@ -1,24 +1,34 @@
-<%# <%= render "devise/shared/navbar" %> %>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+ 
+<div class='grid grid-cols-3 h-full'>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= render 'landing/landing'%>
+    <div class='font-primary -mt-6 col-span-2 flex flex-col text-xl items-center justify-center '>
+      <div class="m-4">
+        <%= f.label :email %><br />
+        <div class='mt-2 border-b-2 border-black'>
+          <%= f.email_field :email, size:30, autocomplete: "email" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      <div class="m-4">
+        <%= f.label :password %><br />
+        <div class='mt-2 border-b-2 border-black'>
+          <%= f.password_field :password, size:30, autocomplete: "new-password" %>
+        </div>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <% if devise_mapping.rememberable? %>
+        <div class="-ml-44">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <button class="actions bg-black px-4 text-white py-2 mt-4 border-black">
+        <%= f.submit "Sign in" %>
+      </button>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
+  </div>    z
 <% end %>
 

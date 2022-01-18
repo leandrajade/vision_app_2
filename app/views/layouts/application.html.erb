@@ -5,12 +5,35 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            primary: ['Montserrat'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono',' Courier New', 'monospace'],
+          },
+          extend: {
+            colors: {
+              black: '#1C1C1C',
+              grey: '#B0B0B0',
+            }
+          }
+        }
+      }
+    </script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class='h-screen w-screen overflow-hidden'>
+    <div class='navbars w-screen h-auto border-b-2 border-black'>
+      <% if current_user == nil %>
+        <%= render "devise/shared/navbar" %>
+      <% end %>
+    </div>
+    <div class='content'>
+      <%= yield %>
+    </div>
   </body>
 </html>

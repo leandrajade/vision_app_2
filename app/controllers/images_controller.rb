@@ -43,6 +43,16 @@ class ImagesController < ApplicationController
     end
   end
 
+  def for_sale
+    price = image_params[:price]
+    for_sale = image_params[:for_sale]
+    if price == nil 
+      price = 0
+    else
+      for_sale = true
+    end
+  end
+
   private
     def get_user
       @user = User.find(params[:user_id])

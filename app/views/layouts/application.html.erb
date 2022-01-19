@@ -24,13 +24,13 @@
             keyframes: {
               hue: {
                 "33.33%": {
-                  transition: "text-red-400" ,
+                  color: "text-red-400" ,
                 },
                 "66.66%": {
-                  transition: "text-blue-400",
+                  color: "text-blue-400",
                 },
                 "99.99%": {
-                  transition: "text-purple-400",
+                  color: "text-purple-400",
                 }
               }
             },
@@ -42,13 +42,15 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class='h-screen w-screen overflow-hidden'>
-    <div class='navbars w-screen h-auto border-b-2 border-black'>
+  <body class='h-screen w-screen overflow-hidden flex flex-col'>
+    <div class='navbars w-screen h-auto border-black border-b-2'>
       <% if current_user == nil %>
         <%= render "devise/shared/navbar" %>
+      <% else %>
+        <%= render "dashboards/authenticated_shared/navbar" %>
       <% end %>
     </div>
-    <div class='content'>
+    <div class='content relative overflow-scroll h-full'>
       <%= yield %>
     </div>
   </body>

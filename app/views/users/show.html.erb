@@ -2,28 +2,19 @@
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Dasboard', dashboards_path %>
 <%= link_to 'My gallery', user_galleries_path(@user) %>
+<%= link_to 'Upload', new_user_image_path(@user) %>
 
-<%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+<div class='my-profile flex flex-col justify-center items-center text-left'>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
+  ##image
+  <p>
+    <%= @user.username %>
+  </p>
+  <p>
+    <%= @user.email %>
+  </p>
+</div>
 
 <%= render 'images/index' %>
+

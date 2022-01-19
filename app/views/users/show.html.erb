@@ -1,13 +1,12 @@
 <p id="notice"><%= notice %></p>
-
-
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'My gallery', user_galleries_path(@user) %>
 <%= link_to 'Upload', new_user_image_path(@user) %>
 
 <div class='my-profile flex flex-col justify-center items-center text-left'>
-
-  ##image
+  <p>
+    <%= image_tag @user.profile_picture.to_s %>
+  </p>
   <p>
     <%= @user.username %>
   </p>

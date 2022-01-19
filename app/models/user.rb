@@ -9,4 +9,6 @@ class User < ApplicationRecord
     
     has_many :images
     has_many :galleries
+
+    mount_uploader :profile_picture, ProfilePictureUploader
 end

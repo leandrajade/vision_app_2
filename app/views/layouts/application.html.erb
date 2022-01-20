@@ -43,7 +43,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class='h-screen w-screen overflow-hidden flex flex-col'>
+  <body class='h-screen w-screen overflow-hidden flex flex-col font-primary'>
     <div class='navbars w-screen h-auto border-black border-b-2'>
       <% if current_user == nil %>
         <%= render "devise/shared/navbar" %>

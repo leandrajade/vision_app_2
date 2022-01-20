@@ -1,16 +1,16 @@
-<div class='grid grid-cols-5' >
+<div class='grid grid-cols-5'>
   <div class="min-h-fit col-start-2 col-end-5 border-x-2 border-black">
     <ul class='flex flex-col items-center'>
       <% @images.each do |image| %>
         <div class='my-4  min-h-full'>
-          <div class='flex items-center my-4'>
+          <div class='flex items-center'>
             <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
             <li><%= image.user.username %></li>
           </div>
           <div class='flex'>
             <li><%= image.title %></li>
               <% if image.price %>
-                HELLO
+                On Market
               <% else %>
                 not for sale
               <% end %>

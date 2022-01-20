@@ -1,6 +1,50 @@
-<h1>Editing User</h1>
+<%= form_with(model: @user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-<%= render 'form', user: @user %>
+        <ul>
+            <% @user.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
+        </div>
+  <% end %>
+    <div  class='h-screen grid grid-cols-5'>
+        <div class='h-full text-xl flex flex-col col-start-2 col-end-5 items-center border-x-2 border-black justify-center '>
+            <div class='w-4/6 h-5/6'>
+                <div class="w-full my-4">
+                    <%= f.label :username %><br />
+                    <div class='mt-6 border-b-2 border-black'>
+                        <%= f.text_field :username, :style => 'width: 100%' %>
+                    </div>
+                </div>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+                <div class="w-full my-4">
+                    <%= f.label :name %><br />
+                    <div class='mt-6 border-b-2 border-black'>
+                        <%= f.text_field :name, :style => 'width: 100%' %>
+                    </div>
+                </div>
+
+                <div class="w-full my-4">
+                    <%= f.label :email %><br />
+                    <div class='mt-6 border-b-2 border-black'>
+                        <%= f.text_field :email, :style => 'width: 100%' %>
+                    </div>
+                </div>
+
+                <div class="w-full my-4">
+                    <%= f.label :profile_picture %><br />
+                    <div class='mt-6 border-black'>
+                        <%= f.file_field :profile_picture, :style => 'width: 100%' %>
+                    </div>
+                </div>
+
+                <div class="w-full mt-8 flex justify-center">
+                    <button class='bg-black text-white py-2 px-4 '><%= f.submit 'Update'%></button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

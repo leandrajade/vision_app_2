@@ -1,30 +1,37 @@
 <%= form_with model: [@user, @image],  local: true do |f| %>
-    <h1>New Image</h1>
+    <div  class='h-screen grid grid-cols-5'>
+        <div class='h-full text-xl flex flex-col col-start-2 col-end-5 items-center border-x-2 border-black justify-center '>
+            <div class='w-4/6 h-5/6'>
+                <div class='h-36 w-full bg-black flex flex-col justify-center items-center text-white mb-8'>
+                    <%= f.label 'Upload a photo'%>
+                    <%= f.file_field :img %>
+                </div>
+            
+                <div class="w-full my-4">
+                    <%= f.label :title %><br />
+                    <div class='mt-6 border-b-2 border-black'>
+                        <%= f.text_field :title, :style => 'width: 100%' %>
+                    </div>
+                </div>
 
+                <div class="w-full my-4">
+                    <%= f.label :caption %><br />
+                    <div class='border-b-2 border-black w-full'>
+                        <%= f.text_area :caption, :style => 'width: 100%' %>
+                    </div>
+                </div>
+            
+                <div class="w-full my-4">
+                    <%= f.label :price %><br />
+                    <div class='mt-6 border-b-2 border-black'>
+                        <%= f.number_field :price, :style => 'width: 100%' %>
+                    </div>
+                </div>
 
-    <div class="field">
-        <%= f.label :title %>
-        <%= f.text_field :title %>
+                <div class="w-full mt-8 flex justify-center">
+                    <button class='bg-black text-white p-2 '><%= f.submit %></button>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="field">
-        <%= f.label :caption %>
-        <%= f.text_field :caption %>
-    </div>
-
-    <div class="field">
-        <%= f.label :price %>
-        <%= f.number_field :price %>
-    </div>
-
-    <div class="field">
-        <%= f.label :img %>
-        <%= f.file_field :img %>
-    </div>
-
-    <div class="actions">
-        <%= f.submit %>
-    </div>
-
-    <%= link_to 'Back', user_images_path %>
 <% end %>

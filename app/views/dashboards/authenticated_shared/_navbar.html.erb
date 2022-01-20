@@ -3,7 +3,7 @@
     <ul class='font-primary col-start-2 text-xl flex justify-evenly'>
       <li class='hover:text-grey'><%= link_to 'Discover', "/" %></li>
       <li class='hover:text-grey'>Home</li>
-      <li class='hover:text-grey'><%= link_to 'My profile', user_path(@user) %></li>
+      <li class='hover:text-grey'><%= link_to 'My profile', user_path(current_user.id) %></li>
     </ul>
     <button class='col-start-3 text-xl hover:text-grey flex justify-end pr-8'><%= button_to 'Sign out', destroy_user_session_path, method: :delete %></button>
 </div>

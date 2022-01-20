@@ -12,6 +12,9 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
   end
 
+  def edit
+    @images = Image.find(params[:id])
+  end
   # GET /images/new
   def new
     @image = Image.new
@@ -44,16 +47,6 @@ class ImagesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  # def for_sale
-  #   price = image_params[:price]
-  #   for_sale = image_params[:for_sale]
-  #   if price == nil 
-  #     price = 0
-  #   else
-  #     for_sale = true
-  #   end
-  # end
 
   private
     def get_user

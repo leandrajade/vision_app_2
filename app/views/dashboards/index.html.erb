@@ -1,18 +1,21 @@
 <div class='grid grid-cols-5' >
-
   <div class="min-h-fit col-start-2 col-end-5 border-x-2 border-black">
     <ul class='flex flex-col items-center'>
       <% @images.each do |image| %>
-        <div class='bg-rose-200 my-4  min-h-full'>
-          <div class='flex'>
-            <li class='mr-4 rounded-full bg-green-400'><%= image_tag image.user.profile_picture.to_s, :size => "60x60"%></li>
+        <div class='my-4  min-h-full'>
+          <div class='flex items-center my-4'>
+            <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
             <li><%= image.user.username %></li>
           </div>
           <div class='flex'>
             <li><%= image.title %></li>
-            <li><%= image.for_sale %></li>
+              <% if image.price %>
+                HELLO
+              <% else %>
+                not for sale
+              <% end %>
           </div>
-          <li><%= link_to image_tag image.img.to_s, :size => "600x600" %></li>
+          <li><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'width:200px; height:200px' %></li>
           <li><%= image.caption %></li>
         </div>
       <% end %>

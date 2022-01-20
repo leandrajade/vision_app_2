@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy follow unfollow ]
   before_action :authenticate_user! 
 
   # GET /users or /users.json
@@ -9,13 +9,21 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    if current_user.id != params[:id].to_i
-      redirect_to "/users/#{current_user.id}"
+    # if current_user.id != params[:id].to_i
+    #   redirect_to "/users/#{current_user.id}"
+    # end
+    @user = User.find(params[:id].to_i)
+    @is_following = false
+    current_user.followings.each do |following|
+      if following.id == @user.id
+        @is_following = true
+        break
+      end
     end
     
-    @user = User.find(current_user.id)
     @images = @user.images.order(created_at: :desc)
   end
+
 
   # GET /users/new
   def new
@@ -68,6 +76,18 @@ class UsersController < ApplicationController
     redirect_to current_user
   end
   
+  def follow 
+    Follow.create({
+      :follower_id => current_user.id,
+      :followed_user_id => @user.id 
+    })
+    redirect_to "/users/#{@user.id}"
+  end
+
+  def unfollow
+    Follow.where(follower_id: current_user.id, followed_user_id: @user.id).destroy_all
+    redirect_to "/users/#{@user.id}"
+  end
   private
 
     def get_user
@@ -80,6 +100,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :name, :email, :profile_picture, :password)
+      params.require(:user).permit(:username, :name, :email, :profile_picture)
     end
 end

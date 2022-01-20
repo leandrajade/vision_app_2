@@ -17,10 +17,12 @@ class ImagesController < ApplicationController
     @image = Image.new
   end
 
+
   # POST /images or /images.json
   def create
     image_params[:user_id] = current_user.id
-    @image = @user.images.build(image_params)
+    image_params[:for_sale] = ActiveModel::Type::Boolean.new.cast(image_params[:price])
+    @image = @user.images.build(image_params) 
 
     respond_to do |format|
       if @image.save
@@ -43,15 +45,15 @@ class ImagesController < ApplicationController
     end
   end
 
-  def for_sale
-    price = image_params[:price]
-    for_sale = image_params[:for_sale]
-    if price == nil 
-      price = 0
-    else
-      for_sale = true
-    end
-  end
+  # def for_sale
+  #   price = image_params[:price]
+  #   for_sale = image_params[:for_sale]
+  #   if price == nil 
+  #     price = 0
+  #   else
+  #     for_sale = true
+  #   end
+  # end
 
   private
     def get_user
@@ -64,6 +66,6 @@ class ImagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def image_params
-      params.require(:image).permit(:title, :caption, :img, :for_sale, :price)
+      params.require(:image).permit(:title, :caption, :img, :price)
     end
 end

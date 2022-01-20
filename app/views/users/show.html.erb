@@ -4,8 +4,8 @@
 <%= link_to 'Upload', new_user_image_path(@user) %>
 
 <div class='my-profile flex flex-col justify-center items-center text-left'>
-  <div class='profile-picture h-16 w-16 bg-indigo-400 rounded-full object-contain'>
-    <%= image_tag @user.profile_picture.to_s %>
+  <div class='profile-picture h-16 w-16 bg-indigo-400'>
+    <%= image_tag @user.profile_picture.to_s, :class => 'object-cover' %>
   </div>
   <p class='my-2'>
     <%= @user.username %>
@@ -13,6 +13,17 @@
   <p class='my-2'>
     <%= @user.email %>
   </p>
+  
+  <% if @user.id == current_user.id %>
+    HELLO <%= current_user.id%>
+  <% else %>
+    <% if @is_following %>
+      <%= link_to 'unfollow', unfollow_user_path(@user) %> 
+    <% else %>
+      <%= link_to 'follow', follow_user_path(@user) %> 
+    <%end%>
+  <% end %>
+
 </div>
 
 <%= render 'images/index' %>

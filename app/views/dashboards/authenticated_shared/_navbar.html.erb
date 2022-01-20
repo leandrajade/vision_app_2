@@ -1,8 +1,8 @@
 <div class='navbar flex items-center my-2 grid grid-cols-3 '>
     <logo class='font-primary font-bold text-3xl col-span-1 flex justify-center col-start-1 pr-4'>VISION</logo>
     <ul class='font-primary col-start-2 text-xl flex justify-evenly'>
-      <li class='hover:text-grey'><%= link_to 'Discover', "/" %></li>
-      <li class='hover:text-grey'>Home</li>
+      <li class='hover:text-grey'><%= link_to 'Discover', dashboards_index_path(current_user.id) %></li>
+      <li class='hover:text-grey'><%= link_to 'Home',"/" %></li>
       <li class='hover:text-grey'><%= link_to 'My profile', user_path(current_user.id) %></li>
     </ul>
     <button class='col-start-3 text-xl hover:text-grey flex justify-end pr-8'><%= button_to 'Sign out', destroy_user_session_path, method: :delete %></button>

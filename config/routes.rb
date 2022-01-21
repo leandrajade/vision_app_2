@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   get "/users/:id/home", to: "home#index", as: "home_index"
   get "/users/:id/dashboards", to: "dashboards#index", as: "dashboards_index"
+  
+  get "/images/:id/buy", to: "images#buy", as: "images_buy"
+  # get "/users/:user_id/images/:id/buy", to: "images#buy", as: "images_buy"
 end

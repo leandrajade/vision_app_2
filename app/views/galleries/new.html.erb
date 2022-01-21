@@ -18,9 +18,30 @@
         <%= f.number_field :gallery_price %>
     </div>
 
+    <div class='w-full grid grid-cols-3 mx-5 gap-5 flex justify-center items-start mt-20'>
+        <% @images.each do |image|%>
+            <div class= 'flex flex-col items-center justify-center w-96 h-auto'>
+            <%= link_to image_tag(image.img.to_s), user_image_path(@user, image)%>
+            <div class='w-full grid grid-cols-2 mt-4 flex'>
+                <span class='mr-4 col-start-1 flex justify-start font-semibold pl-2'><%= image.title %></span>
+                <% if image.price %>
+                <span class='col-start-2 flex justify-end pr-2'><%= image.price %> PHP</span>
+                <% else %>
+                <span class='col-start-2 flex justify-end pr-2'>not for sale</span>
+                <% end %>
+            </div>
+            <div class='w-full max-h-28 flex justify-start pl-2 overflow-y-scroll text-sm'>
+                <span class='col-start-1'><%= image.caption %></span>
+            </div>
+            <%= f.check_box :image_ids, {multiple: true}, image.id, nil %>
+            </div>
+        <% end %>
+    </div>
+
     <div class="actions">
         <%= f.submit %>
     </div>
+
 
 <% end %>
 

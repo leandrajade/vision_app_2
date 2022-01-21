@@ -15,6 +15,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/new
   def new
     @gallery = @user.galleries.build
+    @images = @user.images.order(created_at: :desc)
   end
 
   # GET /galleries/1/edit
@@ -25,10 +26,18 @@ class GalleriesController < ApplicationController
   # POST /galleries or /galleries.json
   def create
     gallery_params[:user_id] = current_user.id
+    image_ids = params[:image_ids]
+    # gallery_params = gallery_params.destroy(:image_ids)
     @gallery = @user.galleries.build(gallery_params)
 
     respond_to do |format|
       if @gallery.save
+        # image_ids.each do |image_id|
+        #   GalleryImage.create({
+        #     :gallery_id => @gallery.id,
+        #     :image_id => image_id
+        #   })
+        # end
         format.html { redirect_to user_gallery_path(@user.id, @gallery), notice: "Gallery was successfully created." }
         format.json { render :show, status: :created, location: @gallery }
       else
@@ -73,6 +82,6 @@ class GalleriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def gallery_params
-      params.require(:gallery).permit(:title, :caption, :gallery_price)
+      params.require(:gallery).permit(:title, :caption, :image_ids, :gallery_price)
     end
 end

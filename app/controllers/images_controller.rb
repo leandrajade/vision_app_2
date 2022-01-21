@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: %i[ show edit update destroy ]
-  before_action :get_user
+  before_action :set_image, only: %i[ show edit update destroy buy ]
+  before_action :get_user, except: %i[ buy ]
 
   # GET /images or /images.json
   def index
@@ -23,8 +23,8 @@ class ImagesController < ApplicationController
 
   # POST /images or /images.json
   def create
-    image_params[:user_id] = current_user.id
-    image_params[:for_sale] = ActiveModel::Type::Boolean.new.cast(image_params[:price])
+    # image_params[:user_id] = current_user.id
+    # image_params[:for_sale] = ActiveModel::Type::Boolean.new.cast(image_params[:price])
     @image = @user.images.build(image_params) 
 
     respond_to do |format|
@@ -45,6 +45,22 @@ class ImagesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_path(@user), notice: "Image was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def buy
+    if current_user.balance >= @image.price
+      current_user.balance = current_user.balance - @image.price
+      current_user.save
+
+      @image.user_id = current_user.id
+      @image.bought = true
+      @image.price = 0
+      @image.save
+
+      redirect_to user_path(current_user)
+    else
+      render html: { errors: 'Insufficient balance', status: :unprocessable_entity }
     end
   end
 

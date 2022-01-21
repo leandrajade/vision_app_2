@@ -21,7 +21,8 @@ class UsersController < ApplicationController
       end
     end
     
-    @images = @user.images.order(created_at: :desc)
+    @images = @user.images.where(bought: false).order(created_at: :desc)
+    @bought_images = @user.images.where(bought: true).order(created_at: :desc)
   end
 
 
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    
   end
 
   # POST /users or /users.json
@@ -100,6 +102,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :name, :email, :profile_picture)
+      params.require(:user).permit(:username, :name, :email, :profile_picture, :balance)
     end
 end

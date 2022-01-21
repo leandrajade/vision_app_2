@@ -3,7 +3,9 @@ class HomeController < ApplicationController
   before_action :get_user
 
   def index
-    @images = Image.where(user_id: current_user.followings.pluck(:id)).order(created_at: :desc).all
+    user_ids = current_user.followings.pluck(:id)
+    user_ids.push(current_user.id)
+    @images = Image.where(user_id: user_ids).order(created_at: :desc).all
   end
   private
     def get_user

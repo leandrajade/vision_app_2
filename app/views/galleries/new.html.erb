@@ -1,48 +1,44 @@
 
 <%= form_with model: [@user, @gallery],  local: true do |f| %>
-    <h1>New Gallery</h1>
-
-
-    <div class="field">
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-    </div>
-
-    <div class="field">
-        <%= f.label :caption %>
-        <%= f.text_field :caption %>
-    </div>
-
-    <div class="field">
-        <%= f.label :gallery_price %>
-        <%= f.number_field :gallery_price %>
-    </div>
-
-    <div class='w-full grid grid-cols-3 mx-5 gap-5 flex justify-center items-start mt-20'>
-        <% @images.each do |image|%>
-            <div class= 'flex flex-col items-center justify-center w-96 h-auto'>
-            <%= link_to image_tag(image.img.to_s), user_image_path(@user, image)%>
-            <div class='w-full grid grid-cols-2 mt-4 flex'>
-                <span class='mr-4 col-start-1 flex justify-start font-semibold pl-2'><%= image.title %></span>
-                <% if image.price %>
-                <span class='col-start-2 flex justify-end pr-2'><%= image.price %> PHP</span>
-                <% else %>
-                <span class='col-start-2 flex justify-end pr-2'>not for sale</span>
-                <% end %>
+    <div  class='h-screen grid grid-cols-5'>
+        <div class='h-full text-xl flex flex-col col-start-2 col-end-5 items-center border-x-2 border-black justify-center '>
+            <div class='w-4/6 h-5/6'>
+                <div class="w-full my-4">
+                    <%= f.label :title %><br />
+                    <div class='mt-6 border-b-2 border-black'>
+                        <%= f.text_field :title, :style => 'width: 100%' %>
+                    </div>
+                </div>
+                <div class="w-full my-4">
+                    <%= f.label :caption %><br />
+                    <div class='border-b-2 border-black w-full'>
+                        <%= f.text_area :caption, :style => 'width: 100%' %>
+                    </div>
+                </div>           
+                <div class="w-full my-4">
+                    <%= f.label :gallery_price %><br />
+                    <div class='mt-6 border-b-2 border-black'>
+                        <%= f.number_field :gallery_price, :style => 'width: 100%' %>
+                    </div>
+                </div>
+                <div class='flex grid grid-cols-3'>
+                    <% @images.each do |image|%>
+                        <div class= 'flex flex-col max-w-sm h-auto'>
+                            <div class='flex h-full'>
+                                <%= link_to image_tag(image.img.to_s), :style => 'object-fit:cover; width:300px; height:auto'%>
+                                <%= f.check_box :image_ids, {multiple: true}, image.id, nil %>
+                            </div>
+                            <div class='w-full grid grid-cols-2 mt-4 flex'>
+                                <span class='mr-4 col-start-1 flex justify-start font-semibold pl-2'><%= image.title %></span>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+                <div class="w-full mt-8 flex justify-center">
+                    <button class='bg-black text-white py-2 px-4 '><%= f.submit 'Create a gallery'%></button>
+                </div>
             </div>
-            <div class='w-full max-h-28 flex justify-start pl-2 overflow-y-scroll text-sm'>
-                <span class='col-start-1'><%= image.caption %></span>
-            </div>
-            <%= f.check_box :image_ids, {multiple: true}, image.id, nil %>
-            </div>
-        <% end %>
+        </div>
     </div>
-
-    <div class="actions">
-        <%= f.submit %>
-    </div>
-
-
 <% end %>
-
 <%= link_to 'Back', user_galleries_path(@user) %>

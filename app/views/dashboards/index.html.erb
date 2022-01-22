@@ -5,7 +5,9 @@
         <div class='my-4 min-h-full'>
           <div class='flex items-center'>
             <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
-            <li><%= image.user.username %></li>
+            <li><%= link_to user_path(image.user.id) do %>
+              <%= image.user.username %>
+            <% end %></li>
           </div>
           <div class='flex'>
             <li><%= image.title %></li>

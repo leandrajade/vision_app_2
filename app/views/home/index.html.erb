@@ -1,23 +1,29 @@
 <% if @images.count != 0 %>
   <div class='grid grid-cols-5'>    
     <div class="min-h-fit col-start-2 col-end-5 border-x-2 border-black">
-        <ul class='flex flex-col items-center'>
+        <ul class='w-4/5'>
           <% @images.each do |image| %>
             <div class='my-4 min-h-full'>
-              <div class='flex items-center'>
+              <div class='flex items-center mb-4'>
                 <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
-                <li><%= image.user.username %></li>
+                <li>
+                  <%= link_to user_path(image.user.id) do %>
+                    <%= image.user.username %>
+                  <% end %>
+                </li>
               </div>
-              <div class='flex'>
-                <li><%= image.title %></li>
+              <div class='flex grid grid-cols-2 mb-4 w-full'>
+                <li class='col-start-1 flex mx-4 justify-start'><%= image.title %></li>
+                <li class='col-start-2 flex mx-4 justify-end'>
                   <% if image.price %>
                     On Market
                   <% else %>
                     not for sale
                   <% end %>
+                </li>
               </div>
-              <li><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'width:200px; height:200px' %></li>
-              <li><%= image.caption %></li>
+              <li class='mx-4'><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'width:100px; height:100px' %></li>
+              <li class='mt-4 mx-4'><%= image.caption %></li>
             </div>
           <% end %>
         </ul>

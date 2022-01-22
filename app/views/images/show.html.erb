@@ -7,7 +7,7 @@
       <% end %>
     </div>
     <span class='h-auto self-start text-base mt-8'><%= @image.caption %></span>
-    <image class='mt-8'><%= image_tag @image.img.to_s, :style => 'object-fit:contain; width:500px; height:auto'  %></image>
+    <image class='mt-8'><%= image_tag @image.img.to_s, :style => 'object-fit:contain; width:800px; height:auto'  %></image>
     <div class='btns mt-8 mb-4'>
       <% if @user.id == current_user.id %>
         <div class='flex'>

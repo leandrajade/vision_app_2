@@ -35,6 +35,13 @@
                 </div>
 
                 <div class="w-full my-4">
+                    <%= f.label :bio %><br />
+                    <div class='mt-6 border-b-2 border-black'>
+                        <%= f.text_area :bio, :style => 'width: 100%' %>
+                    </div>
+                </div>
+
+                <div class="w-full my-4">
                     <%= f.label :balance %><br />
                     <div class='mt-6 border-b-2 border-black'>
                         <%= f.number_field :balance, :style => 'width: 100%' %>

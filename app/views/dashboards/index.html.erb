@@ -1,27 +1,34 @@
-<div class='grid grid-cols-5'>
-  <div class="min-h-fit col-start-2 col-end-5 border-x-2 border-black">
-    <ul class='flex flex-col items-center'>
-      <% @images.each do |image| %>
-        <div class='my-4 min-h-full'>
-          <div class='flex items-center'>
-            <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
-            <li><%= link_to user_path(image.user.id) do %>
-              <%= image.user.username %>
-            <% end %></li>
-          </div>
-          <div class='flex'>
-            <li><%= image.title %></li>
-              <% if image.price %>
-                On Market
-              <% else %>
-                not for sale
-              <% end %>
-          </div>
-          <li><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'width:200px; height:200px' %></li>
-          <li><%= image.caption %></li>
-        </div>
-      <% end %>
-    </ul>
+<% if @images.count != 0 %>
+  <div class='grid grid-cols-5'>    
+    <div class="min-h-fit flex flex-col items-center col-start-2 col-end-5 border-x-2 border-black">
+        <ul class='w-4/5'>
+          <% @images.each do |image| %>
+            <div class='my-4 mt-10 border-b-2 pb-4 border-black'>
+              <div class='flex items-center mb-4 text-lg'>
+                <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
+                <li>
+                  <%= link_to user_path(image.user.id) do %>
+                    <%= image.user.username %>
+                  <% end %>
+                </li>
+              </div>
+              <div class='flex grid grid-cols-2 mb-4 w-full'>
+                <li class='col-start-1 flex mx-4 justify-start'><%= image.title %></li>
+                <li class='col-start-2 flex mx-4 justify-end'>
+                  <% if image.price %>
+                    On Market
+                  <% else %>
+                    not for sale
+                  <% end %>
+                </li>
+              </div>
+              <li class='mx-4'><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'width:100px; height:100px' %></li>
+              <li class='mt-4 mx-4'><%= image.caption %></li>
+            </div>
+          <% end %>
+        </ul>
+    </div>
   </div>
-</div>
-
+<% else %>
+  <span class='h-full w-full flex justify-center items-center text-2xl'> no content to display </span>
+<% end %>

@@ -1,23 +1,34 @@
-<div class='grid grid-cols-5 h-72 '>
-  <div class='h-full my-profile flex flex-col justify-around items-center mt-5 col-start-3'>
-    <div class='profile-picture mt-2'>
-      <%= image_tag @user.profile_picture.to_s, :class =>'mx-4 rounded-full', :style => 'object-fit:cover; width:60px; height:60px'%>
-    </div>
-    <div class='w-11/12 h-80% grid grid-cols-3 flex mt-2'>
-      <div class='flex flex-nowrap text-lg col-start-1 col-end-3 justify-center items-center self-center'>
-        <%= @user.name %>
-      </div>
-      <button class='btns col-start-3 text-base flex justify-center py-2 text-white bg-grey'>
-        <% if @user.id != current_user.id %>
-          <% if @is_following %>
-            <%= link_to 'unfollow', unfollow_user_path(@user) %>
-          <% else %>
-            <%= link_to 'follow', follow_user_path(@user) %>
-          <%end%>
-        <% else %>
-            <%= link_to 'Edit', edit_user_path(@user) %> 
+<div class='grid grid-cols-5 min-h-[40%]'>
+  <div class='h-full my-profile flex flex-col justify-evenly items-center col-start-3 mt-2'>
+    <div class='profile-picture mt-2 flex flex-col w-full'>
+      <button class='absolute text-grey text-base self-end mr-10'>
+        <%= link_to(edit_user_path(@user)) do %>
+          <i class="fa fa-pen"></i>
         <% end %>
       </button>
+      <% if @user.profile_picture? %>
+        <%= image_tag @user.profile_picture.to_s, :class =>'mx-4 rounded-full self-center', :style => 'object-fit:cover; width:80px; height:80px' %>   
+      <% else %>
+        <%= image_tag 'user.jpg', :class =>'mx-4 rounded-full self-center', :style => 'object-fit:cover; width:80px; height:80px' %>
+      <% end %>
+    </div>
+    <div class='w-11/12 h-80% flex justify-around items-center mt-2'>
+      <div class='flex flex-nowrap text-lg self-center'>
+        <span class='mx-2'><%= @user.name %></span>
+        <% if @user.id != current_user.id %>
+          <% if @is_following %>
+            <button class='btns text-base flex justify-center py-2 text-white bg-grey'>
+              <%= link_to 'unfollow', unfollow_user_path(@user) %>
+            </button>   
+          <% else %>
+            <button class='btns text-base flex justify-center py-2 text-white bg-grey'>
+              <%= link_to 'follow', follow_user_path(@user) %>
+            </button>
+          <%end%>
+        <% else %>
+          
+        <% end %>
+      </div>
     </div>
     <p class='text-grey mt-2'>
       <%= @user.username %>
@@ -25,10 +36,6 @@
     <p class='text-grey mt-2'>
       <%= @user.email %>
     </p>
-    <p class='text-grey mt-2'>
-      <%= @user.balance %>
-    </p>
-    <button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'><%= link_to 'Upload', new_user_image_path(@user) %></button>  
   </div>
 </div>
 
@@ -92,7 +99,8 @@
 </ul>
 <div class="tab-content" id="tabs-tabContentFill">
   <div class="tab-pane fade show active" id="tabs-homeFill" role="tabpanel" aria-labelledby="tabs-home-tabFill">
-   <%= render 'images/index' %>
+    <button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'><%= link_to 'Upload a photo', new_user_image_path(@user) %></button>  
+    <%= render 'images/index' %>
   </div>
   <div class="tab-pane fade" id="tabs-profileFill" role="tabpanel" aria-labelledby="tabs-profile-tabFill">
     <%= render 'images/collection' %>

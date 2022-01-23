@@ -36,6 +36,20 @@ class ImagesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /users/1 or /users/1.json
+  def update
+    respond_to do |format|
+      if @image.update(image_params)
+        format.html { redirect_to user_image_path(@user.id, @image), notice: "User was successfully updated." }
+        format.json { render :show, status: :ok, location: user_image_path(@user.id, @image.id) }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @image.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
   # DELETE /images/1 or /images/1.json
   def destroy
     @image.destroy

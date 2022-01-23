@@ -23,8 +23,6 @@ class ImagesController < ApplicationController
 
   # POST /images or /images.json
   def create
-    # image_params[:user_id] = current_user.id
-    # image_params[:for_sale] = ActiveModel::Type::Boolean.new.cast(image_params[:price])
     @image = @user.images.build(image_params) 
 
     respond_to do |format|
@@ -60,7 +58,9 @@ class ImagesController < ApplicationController
 
       redirect_to user_path(current_user)
     else
-      render html: { errors: 'Insufficient balance', status: :unprocessable_entity }
+      respond_to do |format|
+        format.html { render 'images/insufficient_funds', status: :unprocessable_entity  }
+      end
     end
   end
 

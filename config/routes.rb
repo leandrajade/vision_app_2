@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   
   get "/images/:id/buy", to: "images#buy", as: "images_buy"
   # get "/users/:user_id/images/:id/buy", to: "images#buy", as: "images_buy"
+  
 end

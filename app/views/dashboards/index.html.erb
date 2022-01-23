@@ -15,10 +15,8 @@
               <div class='flex grid grid-cols-2 mb-4 w-full'>
                 <li class='col-start-1 flex mx-4 justify-start'><%= image.title %></li>
                 <li class='col-start-2 flex mx-4 justify-end'>
-                  <% if image.price %>
-                    On Market
-                  <% else %>
-                    not for sale
+                  <% if image.price > 0 %>
+                    <span class= 'p-2 bg-black text-white'>On Market</span>
                   <% end %>
                 </li>
               </div>

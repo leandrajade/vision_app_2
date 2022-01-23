@@ -26,9 +26,7 @@ class ImagesController < ApplicationController
   # POST /images or /images.json
   def create
     @image = @user.images.build(image_params) 
-    if @image.price > 0
-      @image.bought = false
-    end
+
     respond_to do |format|
       if @image.save
         format.html { redirect_to user_image_path(@user.id, @image), notice: "Image was successfully created." }

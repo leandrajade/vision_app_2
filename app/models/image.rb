@@ -8,4 +8,10 @@ class Image < ApplicationRecord
     has_many :galleries, through: :gallery_images
 
     mount_uploader :img, ImgUploader
+
+    # def set_bought
+    #     if image.price > 0
+    #         image.bought = false
+    #     end
+    # end 
 end

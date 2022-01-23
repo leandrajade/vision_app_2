@@ -10,6 +10,8 @@ class ImagesController < ApplicationController
   # GET /images/1 or /images/1.json
   def show
     @image = Image.find(params[:id])
+    @images = @user.images.where(bought: false).order(created_at: :desc)
+    @bought_images = @user.images.where(bought: true).order(created_at: :desc)
   end
 
   def edit
@@ -24,7 +26,9 @@ class ImagesController < ApplicationController
   # POST /images or /images.json
   def create
     @image = @user.images.build(image_params) 
-
+    if @image.price > 0
+      @image.bought = false
+    end
     respond_to do |format|
       if @image.save
         format.html { redirect_to user_image_path(@user.id, @image), notice: "Image was successfully created." }

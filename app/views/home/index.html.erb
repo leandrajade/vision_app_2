@@ -16,12 +16,12 @@
                 <li class='col-start-1 flex mx-4 justify-start'><%= image.title %></li>
                 <li class='col-start-2 flex mx-4 justify-end'>
                   <% if image.price > 0 %>
-                    On Market
+                    <span class= 'p-2 bg-black text-white'>On Market</span>
                   <% end %>
                 </li>
               </div>
               <li class='mx-4'><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'width:100px; height:100px' %></li>
-              <li class='mt-4 mx-4'><%= image.caption %></li>
+              <li class='mt-4 mx-4 max-h-28 overflow-y-auto no-scrollbar'><%= image.caption %></li>
             </div>
           <% end %>
         </ul>

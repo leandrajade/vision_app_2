@@ -21,7 +21,7 @@
                 </li>
               </div>
               <li class='mx-4'><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'width:100px; height:100px' %></li>
-              <li class='mt-4 mx-4'><%= image.caption %></li>
+              <li class='mt-4 mx-4 max-h-28 overflow-y-auto no-scrollbar'><%= image.caption %></li>
             </div>
           <% end %>
         </ul>

@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     
     @images = @user.images.where(bought: false).order(created_at: :desc)
     @bought_images = @user.images.where(bought: true).order(created_at: :desc)
+    @galleries = @user.galleries
   end
 
 

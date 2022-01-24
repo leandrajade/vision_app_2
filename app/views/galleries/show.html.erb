@@ -17,7 +17,9 @@
 
 <p>
   <strong>Images</strong>
-  <%= @gallery.images %>
+  <%= @gallery.images.each do |image| %>
+    <%= image_tag(image.img.to_s)%>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_user_gallery_path(@user, @gallery) %> 

@@ -25,6 +25,7 @@ class GalleriesController < ApplicationController
 
   # POST /galleries or /galleries.json
   def create
+    @gallery = @user.galleries.build(gallery_params) 
     # gallery_params[:user_id] = current_user.id
     # image_ids = params[:image_ids]
     # gallery_params = gallery_params.destroy(:image_ids)

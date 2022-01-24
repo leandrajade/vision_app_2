@@ -4,14 +4,8 @@ class Image < ApplicationRecord
 
     belongs_to :user
 
-    has_many :gallery_images
-    has_many :galleries, through: :gallery_images
+    has_many :galleries
+    has_many :gallery_images, through: :galleries
 
     mount_uploader :img, ImgUploader
-
-    # def set_bought
-    #     if image.price > 0
-    #         image.bought = false
-    #     end
-    # end 
 end

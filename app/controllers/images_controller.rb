@@ -38,6 +38,11 @@ class ImagesController < ApplicationController
     end
   end
 
+  # @image = Image.find(params[:id])
+  # if @image.price > 0
+  #   @image.bought = false
+  # end
+
   # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|

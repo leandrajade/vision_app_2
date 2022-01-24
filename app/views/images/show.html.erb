@@ -2,7 +2,7 @@
   <div class='mt-10 h-auto w-2/5 flex flex-col justify-center items-center'>
     <div class='w-full grid grid-cols-2'>
       <span class='col-start-1 font-bold text-2xl'><%= @image.title %></span>
-      <% if @image.price > 0 %>
+      <% if @image.price != nil and @image.price > 0 %>
         <span class='col-start-2 flex justify-end font-bold text-2xl'>PHP <%= @image.price %></span>
       <% end %>
     </div>

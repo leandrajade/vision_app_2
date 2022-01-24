@@ -17,11 +17,11 @@ class ImagesController < ApplicationController
   def edit
     @images = Image.find(params[:id])
   end
+  
   # GET /images/new
   def new
     @image = Image.new
   end
-
 
   # POST /images or /images.json
   def create
@@ -37,11 +37,6 @@ class ImagesController < ApplicationController
       end
     end
   end
-
-  # @image = Image.find(params[:id])
-  # if @image.price > 0
-  #   @image.bought = false
-  # end
 
   # PATCH/PUT /users/1 or /users/1.json
   def update

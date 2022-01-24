@@ -4,7 +4,7 @@ class DashboardsController < ApplicationController
 
   # GET /dashboards or /dashboards.json
   def index
-    @images = Image.order(created_at: :desc).all
+    @images = Image.where(bought: false).or(Image.where('price != 0')).order(updated_at: :desc).all
   end
   private
     def get_user

@@ -33,12 +33,12 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.save
-        # image_ids.each do |image_id|
-        #   GalleryImage.create({
-        #     :gallery_id => @gallery.id,
-        #     :image_id => image_id
-        #   })
-        # end
+        params["gallery"]["image_ids"].each do |image_id|
+          GalleryImage.create({
+            :gallery_id => @gallery.id,
+            :image_id => image_id
+          })
+        end
         format.html { redirect_to user_gallery_path(@user.id, @gallery), notice: "Gallery was successfully created." }
         format.json { render :show, status: :created, location: @gallery }
       else

@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(version: 2022_01_22_202017) do
     t.index ["user_id"], name: "index_galleries_on_user_id"
   end
 
-  create_table "gallery_image", id: false, force: :cascade do |t|
-    t.bigint "gallery_id", null: false
-    t.bigint "image_id", null: false
+  create_table "gallery_images", force: :cascade do |t|
+    t.bigint "gallery_id"
+    t.bigint "image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["gallery_id"], name: "index_gallery_image_on_gallery_id"
-    t.index ["image_id"], name: "index_gallery_image_on_image_id"
+    t.index ["gallery_id"], name: "index_gallery_images_on_gallery_id"
+    t.index ["image_id"], name: "index_gallery_images_on_image_id"
   end
 
   create_table "images", force: :cascade do |t|

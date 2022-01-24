@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'home#home'
+  root to: 'discover_home#home'
   devise_for :users, path: "", path_names: {sign_in: "login", sign_out: "logout"}
   resources :users do
     resources :images
@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get "/users/:id/unfollow", to: "users#unfollow", as: "unfollow_user"
   get "/users/:id/follow", to: "users#follow", as: "follow_user"
 
-  get "/users/:id/home", to: "home#home", as: "home_home"
-  get "/users/:id/discover", to: "home#discover", as: "home_discover"
+  get "/users/:id/home", to: "discover_home#home", as: "discover_home_home"
+  get "/users/:id/discover", to: "discover_home#discover", as: "discover_home_discover"
   
   get "/images/:id/buy", to: "images#buy", as: "images_buy"
   # get "/users/:user_id/images/:id/buy", to: "images#buy", as: "images_buy"

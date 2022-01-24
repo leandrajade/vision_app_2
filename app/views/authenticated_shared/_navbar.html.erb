@@ -1,7 +1,7 @@
 <div class='navbar flex items-center my-2 grid grid-cols-3 '>
     <logo class='font-primary font-bold text-3xl col-span-1 flex justify-center col-start-1 pr-4'>VISION</logo>
     <ul class='font-primary col-start-2 text-xl flex justify-evenly'>
-      <li class='hover:text-grey'><%= link_to 'Discover', home_discover_path(current_user.id) %></li>
+      <li class='hover:text-grey'><%= link_to 'Discover', discover_home_discover_path(current_user.id) %></li>
       <li class='hover:text-grey'><%= link_to 'Home',"/" %></li>
       <li class='hover:text-grey'><%= link_to 'My Profile', user_path(current_user.id) %></li>
     </ul>

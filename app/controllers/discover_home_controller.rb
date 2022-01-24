@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class DiscoverHomeController < ApplicationController
   before_action :authenticate_user! 
   before_action :get_user
 

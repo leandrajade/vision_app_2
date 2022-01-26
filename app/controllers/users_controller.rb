@@ -83,7 +83,7 @@ class UsersController < ApplicationController
       :follower_id => current_user.id,
       :followed_user_id => @user.id 
     })
-    redirect_to "/users/#{@user.id}"
+    redirect_to "/users/#{@user.id}" #needs to remove this 
   end
 
   def unfollow

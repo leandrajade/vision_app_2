@@ -24,11 +24,8 @@
                     <% @images.each do |image|%>
                         <div class= 'flex flex-col max-w-sm h-auto'>
                             <div class='flex h-full'>
-                                <%= link_to image_tag(image.img.to_s), :style => 'object-fit:cover; width:300px; height:auto'%>
-                                <%= f.check_box :image_ids, {multiple: true}, image.id, nil %>
-                            </div>
-                            <div class='w-full grid grid-cols-2 mt-4 flex'>
-                                <span class='mr-4 col-start-1 flex justify-start font-semibold pl-2'><%= image.title %></span>
+                              <%= check_box_tag "gallery[image_ids][]", image.id%>
+                              <%= image_tag(image.img.to_s) %>
                             </div>
                         </div>
                     <% end %>
@@ -41,3 +38,11 @@
     </div>
 <% end %>
 <%# <%= link_to 'Back', user_galleries_path(@user) %>
+
+
+  <%# <%= link_to image_tag(image.img.to_s), :style => 'object-fit:cover; width:300px; height:auto'%> %>
+                                <%# <%= f.check_box :image_ids, {multiple: true}, image.id, nil %> %>
+
+                                 <%# <div class='w-full grid grid-cols-2 mt-4 flex'>
+                                <span class='mr-4 col-start-1 flex justify-start font-semibold pl-2'><%= image.title %></span>
+                            <%# </div> %> %>

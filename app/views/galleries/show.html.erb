@@ -1,12 +1,12 @@
-<div class= 'flex flex-col'>
-  <div class='w-full grid grid-cols-2'>
-    <span class='col-start-1 font-bold text-2xl mx-5'><%= @gallery.title %></span>
+<div class= 'h-screen w-screen flex flex-col items-center mt-20'>
+  <div class='w-11/12 grid grid-cols-2'>
+    <span class='col-start-1 font-bold text-2xl'><%= @gallery.title %></span>
     <% if @gallery.gallery_price != nil and @gallery.gallery_price > 0 %>
-      <span class='col-start-2 bg-rose-200 flex justify-end mx-5'>PHP <%= @gallery.gallery_price %></span>
+      <span class='col-start-2 flex font-bold text-2xl justify-end mx-14'>PHP <%= @gallery.gallery_price %></span>
     <% end %>
   </div>    
-  <span><%= @gallery.caption %></span>
-  <div class='w-full grid grid-cols-3 mx-5 mb-5 gap-5 mt-20 flex justify-center'>
+  <span class='text-base w-11/12'><%= @gallery.caption %></span>
+  <div class='w-11/12 grid grid-cols-3 mx-5 mb-5 gap-5 flex justify-center'>
       <% @gallery.images.each do |image| %>
           <div class='mt-8 w-96 h-auto'>
           <%= image_tag image.img.to_s, :style => 'object-fit:contain; max-width:400px; max-height:400px' %>

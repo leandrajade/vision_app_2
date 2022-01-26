@@ -8,4 +8,8 @@ class Image < ApplicationRecord
     has_many :gallery_images, through: :galleries
 
     mount_uploader :img, ImgUploader
+
+    def myImage
+        ActionController::Base.helpers.image_tag("#{image.url(:thumb)}")
+    end
 end

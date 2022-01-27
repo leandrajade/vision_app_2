@@ -21,13 +21,16 @@
                     </div>
                 </div>
                 <div class='flex grid grid-cols-3'>
-                    <% @gallery.images.each do |image| %>
+                     <% @images.each do |image|%>
                         <div class= 'flex flex-col max-w-sm h-auto'>
                             <div class='flex h-full'>
-                                <%# <%= link_to(delete_image_path(current_user, image)) do %>
-                                <%# <% end %> %> %>
-                                <%# <%= image_tag(image.img.to_s) %> %>
-                            </div>                            
+                                <% if @image_ids.include? image.id %>
+                                  <%= check_box_tag "gallery[image_ids][]", image.id, true%>
+                                <% else %>
+                                  <%= check_box_tag "gallery[image_ids][]", image.id%>
+                                <% end %>
+                              <%= image_tag(image.img.to_s) %>
+                            </div>
                         </div>
                     <% end %>
                 </div>

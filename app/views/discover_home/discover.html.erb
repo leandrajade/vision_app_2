@@ -11,7 +11,7 @@
                     <%= image.user.username %>
                   <% end %>
                   <% if !(current_user.followings.include?(image.user)) %>
-                    <button class= 'p-1 mx-2 border border-grey text-grey'><%= link_to 'Follow', follow_user_path(image.user) %></button>
+                    <button class= 'p-1 mx-2 border text-xs border-black text-black'><%= link_to 'Follow', follow_user_path(image.user) %></button>
                   <% end %>
                 </li>
               </div>

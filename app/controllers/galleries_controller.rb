@@ -23,18 +23,17 @@ class GalleriesController < ApplicationController
   # GET /galleries/1/edit
   def edit
     @galleries = Gallery.find(params[:id])
+    @image_ids = @galleries.gallery_images.pluck(:image_id)
+    @images = @user.images.order(created_at: :desc)
   end
 
   # POST /galleries or /galleries.json
   def create
-    @gallery = @user.galleries.build(gallery_params) 
-    # gallery_params[:user_id] = current_user.id
-    # image_ids = params[:image_ids]
-    # gallery_params = gallery_params.destroy(:image_ids)
-    # @gallery = @user.galleries.build(gallery_params)
+    gallery_params[:user_id] = current_user.id
+    @gallery = @user.galleries.build(gallery_params)
 
     respond_to do |format|
-      if @gallery.save
+      if params["gallery"]["image_ids"] && @gallery.save     
         params["gallery"]["image_ids"].each do |image_id|
           GalleryImage.create({
             :gallery_id => @gallery.id,
@@ -55,7 +54,14 @@ class GalleriesController < ApplicationController
     gallery_params[:user_id] = current_user.id
 
     respond_to do |format|
-      if @gallery.update(gallery_params)
+      if params["gallery"]["image_ids"] && @gallery.update(gallery_params)
+        @gallery.gallery_images.delete_all
+        params["gallery"]["image_ids"].each do |image_id|
+          GalleryImage.create({
+            :gallery_id => @gallery.id,
+            :image_id => image_id
+          })
+        end
         format.html { redirect_to user_gallery_path(@user.id, @gallery), notice: "Gallery was successfully updated." }
         format.json { render :show, status: :ok, location: @gallery }
       else
@@ -75,14 +81,14 @@ class GalleriesController < ApplicationController
     end
   end
 
-  def remove_image 
-    # gallery_id = @gallery.id
-  end
-
   def buy
     if current_user.balance >= @gallery.gallery_price
       current_user.balance = current_user.balance - @gallery.gallery_price
       current_user.save
+
+      owner = User.find(@gallery.user_id)
+      owner.balance = owner.balance + @gallery.gallery_price
+      owner.save
 
       @gallery.user_id = current_user.id
       @gallery.gallery_price = 0
@@ -111,3 +117,4 @@ class GalleriesController < ApplicationController
       params.require(:gallery).permit(:title, :caption, :gallery_price)
     end
 end
+

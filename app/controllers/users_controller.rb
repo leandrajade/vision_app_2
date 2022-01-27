@@ -20,7 +20,6 @@ class UsersController < ApplicationController
         break
       end
     end
-    
     @images = @user.images.where(bought: false).order(created_at: :desc)
     @bought_images = @user.images.where(bought: true).order(created_at: :desc)
     @bought_galleries = @user.galleries.where(bought: true).order(updated_at: :desc)

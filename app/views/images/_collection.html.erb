@@ -1,4 +1,6 @@
-<button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'>Photos</button>  
+<% if @bought_images != nil %>
+  <button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'>Photos</button>  
+<% end %>
 <div class='w-full grid grid-cols-3 mx-5 gap-5 mb-5  flex justify-center items-start mt-20'>
   <% @bought_images.each do |image| %>
     <div class= 'flex flex-col items-center justify-center w-96 h-auto'>
@@ -17,7 +19,10 @@
     </div>
   <% end %>
 </div>
-<button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'>Galleries</button>  
+<% if @bought_images.count > 0 %>
+  <button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'>Galleries</button>  
+<% end %>
+
 <div class='w-full grid grid-cols-3 mx-5 gap-5 mb-5  flex justify-center items-start mt-20'>
   <% @bought_galleries.each do |gallery| %>
     <div class= 'flex flex-col items-center justify-center w-96 h-auto'>

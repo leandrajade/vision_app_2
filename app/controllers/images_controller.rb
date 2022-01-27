@@ -67,6 +67,10 @@ class ImagesController < ApplicationController
       current_user.balance = current_user.balance - @image.price
       current_user.save
 
+      owner = User.find(@image.user_id)
+      owner.balance = owner.balance + @image.price
+      owner.save
+
       @image.user_id = current_user.id
       @image.bought = true
       @image.price = 0

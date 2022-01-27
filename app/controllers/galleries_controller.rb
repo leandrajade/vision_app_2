@@ -1,5 +1,5 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: %i[ show edit update destroy remove_image buy ]
+  before_action :set_gallery, only: %i[ show edit update destroy buy ]
   before_action :get_user
 
   # GET /galleries or /galleries.json
@@ -22,8 +22,8 @@ class GalleriesController < ApplicationController
 
   # GET /galleries/1/edit
   def edit
-    @galleries = Gallery.find(params[:id])
-    @image_ids = @galleries.gallery_images.pluck(:image_id)
+    @gallery = Gallery.find(params[:id])
+    @image_ids = @gallery.gallery_images.pluck(:image_id)
     @images = @user.images.order(created_at: :desc)
   end
 
@@ -104,9 +104,11 @@ class GalleriesController < ApplicationController
   end
 
   private
+
     def get_user
       @user = User.find(current_user.id)
     end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_gallery
       @gallery = Gallery.find(params[:id])

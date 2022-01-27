@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   get "/users/:id/home", to: "discover_home#home", as: "discover_home_home"
   get "/users/:id/discover", to: "discover_home#discover", as: "discover_home_discover"
   
-  get "/images/:id/buy", to: "images#buy", as: "images_buy"
-  # get "/users/:user_id/images/:id/buy", to: "images#buy", as: "images_buy"
+  get "/images/:id/buy", to: "images#buy", as: "images_buy"  
   
+  get "/galleries/:id/buy", to: "galleries#buy", as: "galleries_buy"  
+  delete "/galleries/:id/remove", to: "galleries#remove_image", as: "remove_image"  
 end

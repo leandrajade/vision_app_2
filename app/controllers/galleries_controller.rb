@@ -1,15 +1,17 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: %i[ show edit update destroy ]
+  before_action :set_gallery, only: %i[ show edit update destroy remove_image buy ]
   before_action :get_user
 
   # GET /galleries or /galleries.json
   def index
-    @galleries = @user.galleries
+    @galleries = @user.galleries.order(created_at: :desc)
   end
 
   # GET /galleries/1 or /galleries/1.json
   def show
     @gallery = Gallery.find(params[:id])
+    @galleries = @user.galleries.where(bought: false).order(created_at: :desc)
+    @bought_galleries = @user.galleries.where(bought: true).order(created_at: :desc)
   end
 
   # GET /galleries/new
@@ -51,6 +53,7 @@ class GalleriesController < ApplicationController
   # PATCH/PUT /galleries/1 or /galleries/1.json
   def update
     gallery_params[:user_id] = current_user.id
+
     respond_to do |format|
       if @gallery.update(gallery_params)
         format.html { redirect_to user_gallery_path(@user.id, @gallery), notice: "Gallery was successfully updated." }
@@ -69,6 +72,30 @@ class GalleriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_galleries_url, notice: "Gallery was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def remove_image 
+    # gallery_id = @gallery.id
+  end
+
+  def buy
+    if current_user.balance >= @gallery.gallery_price
+      
+      current_user.balance = current_user.balance - @gallery.gallery_price
+      current_user.save
+
+      @gallery.user_id = current_user.id
+      @gallery.gallery_price = 0
+      @gallery.bought = true
+      @gallery.save
+
+      redirect_to user_path(current_user)
+      byebug
+    else
+      respond_to do |format|
+        format.html { render 'images/insufficient_funds', status: :unprocessable_entity  }
+      end
     end
   end
 

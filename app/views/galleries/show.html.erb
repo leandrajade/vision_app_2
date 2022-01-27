@@ -20,7 +20,7 @@
           <span class='mx-2'><%= link_to 'Edit', edit_user_gallery_path(current_user, @gallery) %></span>
         </div>
       <% else %>
-        <%# <button class='border-2 px-4 py-2 bg-black text-white mt-8'><%= link_to 'BUY', images_buy_path(@image) %></button> %>
+        <button class='border-2 px-4 py-2 bg-black text-white mt-8'><%= link_to 'BUY', galleries_buy_path(@gallery)%></button>
       <% end %>
     </div>
 </div>

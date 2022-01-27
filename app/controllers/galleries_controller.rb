@@ -81,7 +81,6 @@ class GalleriesController < ApplicationController
 
   def buy
     if current_user.balance >= @gallery.gallery_price
-      
       current_user.balance = current_user.balance - @gallery.gallery_price
       current_user.save
 
@@ -91,7 +90,6 @@ class GalleriesController < ApplicationController
       @gallery.save
 
       redirect_to user_path(current_user)
-      byebug
     else
       respond_to do |format|
         format.html { render 'images/insufficient_funds', status: :unprocessable_entity  }

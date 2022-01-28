@@ -1,30 +1,51 @@
 <% if @images != nil %>
-  <div class='grid grid-cols-5'>    
-    <div class="min-h-fit flex flex-col items-center col-start-2 col-end-5 border-x-2 border-black">
-        <ul class='w-4/5'>
-          <% @images.each do |image| %>
-            <div class='my-4 mt-10 border-b-2 pb-4 border-black'>
-              <div class='flex items-center mb-4 text-lg'>
-                <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
-                <li>
-                  <%= link_to user_path(image.user.id) do %>
-                    <%= image.user.username %>
-                  <% end %>
-                </li>
-              </div>
-              <div class='flex grid grid-cols-2 mb-4 w-full'>
-                <li class='col-start-1 flex mx-4 justify-start'><%= image.title %></li>
-                <li class='col-start-2 flex mx-4 justify-end'>
-                  <% if image.price != nil and image.price > 0 %>
-                    <span class= 'p-2 bg-black text-white'>On Market</span>
-                  <% end %>
-                </li>
-              </div>
-              <li class='mx-4'><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'width:100px; height:100px' %></li>
-              <li class='mt-4 mx-4 max-h-28 overflow-y-auto no-scrollbar'><%= image.caption %></li>
+  <div class='grid grid-cols-6'>    
+    <div class="min-h-fit flex flex-col items-center col-start-2 col-end-5 ">
+      <ul class='w-4/5'>
+        <% @images.each do |image| %>
+          <div class='my-4 mt-5 p-5 border-2 pb-4 border-black'>
+            <div class='flex items-center mb-4 text-lg'>
+              <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
+              <li>
+                <%= link_to user_path(image.user.id) do %>
+                  <%= image.user.username %>
+                <% end %>
+                <% if !(current_user.followings.include?(image.user)) %>
+                  <button class= 'p-1 mx-2 border text-xs border-black text-black'><%= link_to 'Follow', follow_user_path(image.user) %></button>
+                <% end %>
+              </li>
             </div>
-          <% end %>
-        </ul>
+            <div class='flex grid grid-cols-2 mb-4 w-full'>
+              <li class='col-start-1 flex mx-4 justify-start'><%= image.title %></li>
+              <li class='col-start-2 flex mx-4 justify-end'>
+                <% if image.price != nil and image.price > 0 %>
+                  <span class= 'p-2 bg-black text-white'>On Market</span>
+                <% end %>
+              </li>
+            </div>
+            <li class='mx-4'><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'height:10px' %></li>
+            <li class='mt-4 mx-4 max-h-28 overflow-y-auto no-scrollbar'><%= image.caption %></li>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+    <div class='user-profile relative col-start-5 mt-5'>
+      <div class='user-profile h-3/6 w-1/6 fixed col-start-5 border-2 border-black'>
+        <div class='flex items-center mt-5'>
+          <%= image_tag @user.profile_picture.to_s, :class =>'mx-4 rounded-full', :style => 'object-fit:cover; width:50px; height:50px' %>  
+          <div class='flex flex-col justify-center'>
+            <span class='text-xs '><%= @user.name %></span>
+            <span class='text-xs '><%= @user.username %></span>
+          </div> 
+        </div>
+        <span class='text-xs mx-20 my-4'>balance: PHP <%= @user.balance %></span>
+
+        <div class='flex items-center mt-5 mx-4 text-grey uppercase text-xs'>
+          Users you can follow
+          <div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 <% else %>

@@ -1,6 +1,6 @@
 class DiscoverHomeController < ApplicationController
-  before_action :authenticate_user! 
-  before_action :get_user
+  before_action :authenticate_user!, except: %i[public_view]
+  before_action :get_user, except: %i[public_view]
 
   def home
     user_ids = current_user.followings.pluck(:id)
@@ -12,6 +12,12 @@ class DiscoverHomeController < ApplicationController
     # gallery_image_ids = GalleryImage.pluck(:image_id).map
     # @images = Image.where(bought: false).or(Image.where('price != 0')).or(Image.where(id: !gallery_image_ids)).order(updated_at: :desc).all
     @images = Image.where(bought: false).or(Image.where('price != 0')).order(updated_at: :desc).all
+  end
+
+  def public_view
+    # @images = Image.all
+    @images = Image.where(bought: false).or(Image.where('price != 0')).order(updated_at: :desc).all
+
   end
   
   private

@@ -104,7 +104,6 @@ class GalleriesController < ApplicationController
   end
 
   private
-
     def get_user
       @user = User.find(current_user.id)
     end

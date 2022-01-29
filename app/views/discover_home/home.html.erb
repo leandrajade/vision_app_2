@@ -5,7 +5,11 @@
         <% @images.each do |image| %>
           <div class='my-4 mt-5 p-5 border-2 pb-4 border-black'>
             <div class='flex items-center mb-4 text-lg'>
-              <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
+              <% if image.user.profile_picture? %>
+                <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
+              <% else %>
+                <%= image_tag 'user.jpg', :class =>'mx-4 rounded-full self-center', :style => 'object-fit:cover; width:30px; height:30px' %>
+              <% end %>            
               <li>
                 <%= link_to user_path(image.user.id) do %>
                   <%= image.user.username %>
@@ -32,7 +36,11 @@
     <div class='user-profile relative col-start-5 mt-5'>
       <div class='user-profile h-3/6 w-1/6 fixed col-start-5 border-2 border-black'>
         <div class='flex items-center mt-5'>
-          <%= image_tag @user.profile_picture.to_s, :class =>'mx-4 rounded-full', :style => 'object-fit:cover; width:50px; height:50px' %>  
+          <% if @user.profile_picture? %>
+            <%= image_tag @user.profile_picture.to_s, :class =>'mx-4 rounded-full', :style => 'object-fit:cover; width:50px; height:50px' %>  
+          <% else %>
+            <%= image_tag 'user.jpg', :class =>'mx-4 rounded-full self-center', :style => 'object-fit:cover; width:50px; height:50px' %>
+          <% end %>
           <div class='flex flex-col justify-center'>
             <span class='text-xs '><%= @user.name %></span>
             <span class='text-xs '><%= @user.username %></span>
@@ -40,14 +48,28 @@
         </div>
         <span class='text-xs mx-20 my-4'>balance: PHP <%= @user.balance %></span>
 
-        <div class='flex items-center mt-5 mx-4 text-grey uppercase text-xs'>
-          Users you can follow
-          <div>
-            <% @to_follow.each do |user| %>
-              <%= user.username %>
-            <% end %>
+        <% if @suggested_users %>
+          <div class='flex w-full flex-col items-center mt-5 text-grey text-xs'>
+            <span class=' w-full py-1 ml-4 flex justify-start'>
+              Users you can follow
+            </span>
+            <div class='w-full'>
+              <% @suggested_users.each do |user| %>
+                <div class='suggested-users flex items-center py-1'>
+                  <% if user.profile_picture? %>
+                    <%= image_tag user.profile_picture.to_s, :class =>' mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px' %>
+                  <% else %>
+                    <%= image_tag 'user.jpg', :class =>'mx-4 rounded-full self-center', :style => 'object-fit:cover; width:30px; height:30px' %>
+                  <% end %>
+                  <span class='justify-center'><%= user.username %></span>
+                  <span class= 'w-full mr-4 text-xs text-black flex justify-end'>
+                    <%= link_to 'Follow', follow_user_path(user) %>
+                  </span>
+                </div>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>

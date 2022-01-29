@@ -4,9 +4,11 @@
       <% @images.each do |image|%>
         <div class= 'flex flex-col min-h-max h-fit items-start justify-center w-96 min-h-max mt-5 p-5 border-2 pb-4 border-black'>
           <div class='flex items-center mb-4 text-lg'>
-            <div>
+            <% if image.user.profile_picture? %>
               <%= image_tag image.user.profile_picture.to_s, :class =>'mr-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%>
-            </div>
+            <% else %>
+              <%= image_tag 'user.jpg', :class =>'mr-4 rounded-full self-center', :style => 'object-fit:cover; width:30px; height:30px' %>
+            <% end %>  
             <div>
               <%= link_to user_path(image.user.id) do %>
                 <%= image.user.username %>

@@ -9,8 +9,6 @@ class DiscoverHomeController < ApplicationController
   end
 
   def discover
-    # gallery_image_ids = GalleryImage.pluck(:image_id).map
-    # @images = Image.where(bought: false).or(Image.where('price != 0')).or(Image.where(id: !gallery_image_ids)).order(updated_at: :desc).all
     @images = Image.where(bought: false).or(Image.where('price != 0')).order(updated_at: :desc).all
   end
 

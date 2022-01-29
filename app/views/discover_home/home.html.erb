@@ -43,6 +43,9 @@
         <div class='flex items-center mt-5 mx-4 text-grey uppercase text-xs'>
           Users you can follow
           <div>
+            <% @to_follow.each do |user| %>
+              <%= user.username %>
+            <% end %>
           </div>
         </div>
       </div>

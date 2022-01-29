@@ -58,13 +58,18 @@
   </head>
 
   <body class='h-screen w-screen overflow-hidden flex flex-col font-primary'>
-    <div class='navbars w-screen h-auto border-black border-b-2'>
-      <% if current_user == nil %>
-        <%= render "devise/shared/navbar" %>
+    <% if current_user == nil && controller.controller_name == 'preview' && controller.action_name == 'index' %>
+      <%= render "preview/preview" %>
       <% else %>
-        <%= render "authenticated_shared/navbar" %>
-      <% end %>
-    </div>
+        <div class='navbars w-screen h-auto border-black border-b-2'>    
+          <% if current_user == nil %>
+            <%= render "devise/shared/navbar" %>
+          <% else %>
+            <%= render "authenticated_shared/navbar" %>
+          <% end %>
+        </div>
+    <% end %>
+
     <div class='content relative overflow-y-auto h-full'>
       <%= yield %>
     </div>

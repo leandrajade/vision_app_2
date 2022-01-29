@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'discover_home#home'
   devise_for :users, path: "", path_names: {sign_in: "login", sign_out: "logout"}
+  get "/preview", to: "preview#index", as: "preview"
+  
   resources :users do
     resources :images
     resources :galleries
@@ -11,7 +13,7 @@ Rails.application.routes.draw do
 
   get "/users/:id/home", to: "discover_home#home", as: "discover_home_home"
   get "/users/:id/discover", to: "discover_home#discover", as: "discover_home_discover"
-  get "/public_view", to: "discover_home#public_view", as: "discover_home_public_view"
+  get "/public", to: "discover_home#public", as: "discover_home_public"
   
   get "/images/:id/buy", to: "images#buy", as: "images_buy"  
   

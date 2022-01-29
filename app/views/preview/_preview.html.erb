@@ -1,0 +1,32 @@
+<% if @images %>
+  <div class='grid grid-cols-6 grid-rows-3 grid-flow-row-dense'>    
+    <div class="min-h-fit flex items-center col-start-2 col-end-6 row-start-1 row-end-3">
+      <ul>
+        <% @images.each do |image| %>
+          <div class='my-4 mt-5 p-5 border-2 pb-4 border-black'>
+            <div class='flex items-center mb-4 text-lg'>
+              <li><%= image_tag image.user.profile_picture.to_s, :class =>'mx-4 rounded-full bg-green-400', :style => 'object-fit:cover; width:30px; height:30px'%></li>
+              <li>
+                <%= link_to user_path(image.user.id) do %>
+                  <%= image.user.username %>
+                <% end %>
+              </li>
+            </div>
+            <div class='flex grid grid-cols-2 mb-4 w-full'>
+              <li class='col-start-1 flex mx-4 justify-start'><%= image.title %></li>
+              <li class='col-start-2 flex mx-4 justify-end'>
+                <%# <% if image.price != nil and image.price > 0 %>
+                  <%# <span class= 'p-2 bg-black text-white'>On Market</span> %>
+                <%# <% end %>
+              </li>
+            </div>
+            <%# <li class='mx-4'><%= link_to image_tag(image.img.to_s), user_image_path(@user, image), :style => 'height:10px' %></li> %>
+            <li class='mt-4 mx-4 max-h-28 overflow-y-auto no-scrollbar'><%= image.caption %></li>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% else %>
+  <span class='h-full w-full flex justify-center items-center text-2xl'> no content to display </span>
+<% end %>

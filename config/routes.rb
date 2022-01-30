@@ -13,7 +13,8 @@ Rails.application.routes.draw do
 
   get "/users/:id/home", to: "discover_home#home", as: "discover_home_home"
   get "/users/:id/discover", to: "discover_home#discover", as: "discover_home_discover"
-  get "/public", to: "discover_home#public", as: "discover_home_public"
+  
+  # get "/public", to: "discover_home#public", as: "discover_home_public"
   
   get "/images/:id/buy", to: "images#buy", as: "images_buy"  
   

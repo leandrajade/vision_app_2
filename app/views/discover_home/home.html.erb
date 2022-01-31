@@ -61,7 +61,7 @@
                   <% else %>
                     <%= image_tag 'user.jpg', :class =>'mx-4 rounded-full self-center', :style => 'object-fit:cover; width:30px; height:30px' %>
                   <% end %>
-                  <span class='justify-center'><%= user.username %></span>
+                  <span class='justify-center'><%= link_to user.username, user_path(user) %></span>
                   <span class= 'w-full mr-4 text-xs text-black flex justify-end'>
                     <%= link_to 'Follow', follow_user_path(user) %>
                   </span>

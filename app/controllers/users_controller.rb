@@ -73,10 +73,6 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  # def current_user_home
-  #   redirect_to current_user
-  # end
   
   def follow 
     Follow.create({

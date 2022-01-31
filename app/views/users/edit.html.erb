@@ -58,6 +58,11 @@
                 <div class="w-full mt-8 flex justify-center">
                     <button class='bg-black text-white py-2 px-4 '><%= f.submit 'Update'%></button>
                 </div>
+
+                <button class='btns text-base flex justify-center py-2 text-white bg-black px-2 -mt-2'>
+                    <%= link_to 'Delete my account',  registration_path(resource_name), method: :delete, data: { confirm: 'Are you sure you want to delete your account?' } %>
+                </button>
+
             </div>
         </div>
     </div>

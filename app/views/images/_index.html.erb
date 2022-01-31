@@ -5,9 +5,7 @@
       <div class='w-full grid grid-cols-2 mt-4 flex'>
         <span class='mr-4 col-start-1 flex justify-start font-semibold pl-2'><%= image.title %></span>
         <% if image.price != nil and image.price > 0 %>
-          <span class='col-start-2 flex justify-end pr-2'><%= image.price %> PHP</span>
-        <% else %>
-          <span class='col-start-2 flex justify-end pr-2'>not for sale</span>
+          <span class='col-start-2 flex font-semibold  justify-end pr-2'><%= image.price %> PHP</span>
         <% end %>
       </div>
       <div class='w-full max-h-28 flex justify-start pl-2 overflow-y-auto no-scrollbar text-sm'>

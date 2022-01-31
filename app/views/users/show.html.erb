@@ -33,7 +33,7 @@
     <p class='text-grey mt-2'>
       <%= @user.username %>
     </p>
-    <p class='text-grey mt-2 text-center'>
+    <p class='text-grey mt-2 text-center overflow-y-auto no-scrollbar text-sm  max-h-28'>
       <%= @user.bio %>
     </p>
   </div>
@@ -105,11 +105,15 @@
 </ul>
 <div class="tab-content" id="tabs-tabContentFill">
   <div class="tab-pane fade show active" id="tabs-homeFill" role="tabpanel" aria-labelledby="tabs-home-tabFill">
-    <button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'><%= link_to 'Upload a photo', new_user_image_path(@user) %></button>  
+    <% if @user.id == current_user.id %>
+      <button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'><%= link_to 'Upload a photo', new_user_image_path(@user) %></button>  
+    <% end %>
     <%= render 'images/index' %>
   </div>
   <div class="tab-pane fade" id="tabs-profileFill" role="tabpanel" aria-labelledby="tabs-profile-tabFill">
-    <button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'><%= link_to 'Create a gallery', new_user_gallery_path(@user) %></button>  
+    <% if @user.id == current_user.id %>
+      <button class='mt-2 h-fit w-fit py-2.5 px-4 text-white bg-black'><%= link_to 'Create a gallery', new_user_gallery_path(@user) %></button>  
+    <% end %>
     <%= render 'galleries/index' %>
   </div>
   <div class="tab-pane fade" id="tabs-messagesFill" role="tabpanel" aria-labelledby="tabs-profile-tabFill">

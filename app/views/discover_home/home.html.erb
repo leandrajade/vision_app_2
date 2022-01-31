@@ -34,7 +34,7 @@
       </ul>
     </div>
     <div class='user-profile relative col-start-5 mt-5'>
-      <div class='user-profile h-3/6 w-1/6 fixed col-start-5 border-2 border-black'>
+      <div class='user-profile max-h-fit w-1/6 fixed col-start-5 border-2 border-black'>
         <div class='flex items-center mt-5'>
           <% if @user.profile_picture? %>
             <%= image_tag @user.profile_picture.to_s, :class =>'mx-4 rounded-full', :style => 'object-fit:cover; width:50px; height:50px' %>  
@@ -46,14 +46,14 @@
             <span class='text-xs '><%= @user.username %></span>
           </div> 
         </div>
-        <span class='text-xs mx-20 my-4'>balance: PHP <%= @user.balance %></span>
+        <span class='text-xs ml-20 my-4 flex-wrap'>balance: PHP <%= @user.balance %></span>
 
         <% if @suggested_users %>
-          <div class='flex w-full flex-col items-center mt-5 text-grey text-xs'>
+          <div class='flex w-full flex-col items-center my-5 text-grey text-xs'>
             <span class=' w-full py-1 ml-4 flex justify-start'>
               Users you can follow
             </span>
-            <div class='w-full'>
+            <div class='w-full mt-2'>
               <% @suggested_users.each do |user| %>
                 <div class='suggested-users flex items-center py-1'>
                   <% if user.profile_picture? %>

@@ -1,6 +1,6 @@
 <div class='h-screen w-screen flex flex-col justify-center items-center'>
-  <div class='mt-10 h-auto w-2/5 flex flex-col justify-center items-center'>
-    <button class='text-grey text-xl self-end'>
+  <div class='h-auto w-2/5 flex flex-col justify-center items-center'>
+    <button class='text-grey text-xl self-center'>
       <%= link_to(user_path(@user)) do %>
         <i class="fas fa-times"></i>
       <% end %>
@@ -16,7 +16,7 @@
     <% if @image.caption != nil %>
       <span class='h-auto self-start text-base mt-8'><%= @image.caption %></span>
     <% end %>
-    <image class='mt-8'><%= image_tag @image.img.to_s, :style => 'object-fit:contain; max-width:800px; max-height:500px'  %></image>
+    <image class='mt-8'><%= image_tag @image.img.to_s, :style => 'object-fit:contain; max-width:615px; max-height:500px'  %></image>
     <div class='btns mt-8 mb-4'>
       <% if @image.user_id == current_user.id %>
         <div class='flex'>

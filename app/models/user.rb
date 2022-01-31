@@ -26,4 +26,17 @@ class User < ApplicationRecord
     has_many :followings, through: :given_follows, source: :followed_user
 
     mount_uploader :profile_picture, ProfilePictureUploader
+
+    def self.search(search)
+      if search
+        username = User.find_by(username: search)
+        if username
+          self.where(user_id: username)
+        else
+          User.all
+        end
+      else
+        User.all
+      end
+    end
 end

@@ -1,0 +1,15 @@
+<div>
+    
+    <%= form_tag(users_path, method: :get) do %>
+        <%= text_field_tag(:search, params[:search])%>
+        <%= submit_tag ("search")%>
+    <% end %>
+
+    <% if params[:search] %>
+        <% @users.each do |user| %>
+            <ul>
+                <li><%= link_to user.username, user_path(user)%></li>
+            </ul>
+        <% end %>
+    <% end %>
+</div>

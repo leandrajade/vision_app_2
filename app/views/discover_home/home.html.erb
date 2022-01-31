@@ -1,6 +1,9 @@
-<% if @images != nil %>
-  <div class='grid grid-cols-6'>    
-    <div class="min-h-fit flex flex-col items-center col-start-2 col-end-5 ">
+<div class='grid grid-cols-6'>  
+  <div class="min-h-fit flex flex-col items-center col-start-2 col-end-5 ">
+    <div class='search-bar w-4/5'>
+      <%= render "users/index"%>
+    </div>
+    <% if @images != nil %>  
       <ul class='w-4/5'>
         <% @images.each do |image| %>
           <div class='my-4 mt-5 p-5 border-2 pb-4 border-black'>
@@ -71,8 +74,8 @@
           </div>
         <% end %>
       </div>
-    </div>
+    <% else %>
+      <span class='h-full w-full flex justify-center items-center text-2xl'> no content to display </span>
+    <% end %>
   </div>
-<% else %>
-  <span class='h-full w-full flex justify-center items-center text-2xl'> no content to display </span>
-<% end %>
+</div>

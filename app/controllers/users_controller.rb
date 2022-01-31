@@ -4,7 +4,8 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    # @users = User.where('search LIKE ?', "%#{params[:search]}%")
+    @users = User.search(params[:search])
   end
 
   # GET /users/1 or /users/1.json
@@ -79,8 +80,7 @@ class UsersController < ApplicationController
       :follower_id => current_user.id,
       :followed_user_id => @user.id 
     })
-    redirect_to "/users/#{@user.id}" #needs to remove this 
-  end
+    redirect_to "/users/#{@user.id}"
 
   def unfollow
     Follow.where(follower_id: current_user.id, followed_user_id: @user.id).destroy_all
@@ -98,6 +98,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :name, :email, :profile_picture, :balance, :bio)
+      params.require(:user).permit(:username, :name, :email, :profile_picture, :balance, :bio, :search)
     end
+  end
 end

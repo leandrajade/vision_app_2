@@ -10,7 +10,7 @@ class DiscoverHomeController < ApplicationController
   end
 
   def discover
-    @images = Image.where(bought: false).or(Image.where('price != 0')).order(updated_at: :desc).all
+    @images = Image.where(bought: false).or(Image.where('price != 0')).order(created_at: :desc).all
   end
 
   def public

@@ -1,11 +1,14 @@
 <div class= 'h-screen w-screen flex flex-col items-center mt-20'>
-  <div class='w-11/12 grid grid-cols-2'>
-    <span class='col-start-1 font-bold text-2xl'><%= @gallery.title %></span>
-    <% if @gallery.gallery_price != nil and @gallery.gallery_price > 0 %>
-      <span class='col-start-2 flex font-bold text-2xl justify-end mx-14'>PHP <%= @gallery.gallery_price %></span>
-    <% end %>
-  </div>    
-  <span class='text-base w-11/12'><%= @gallery.caption %></span>
+  <div class='mx-60'>
+    <div class='w-11/12 grid grid-cols-2 mb-10'>
+    <span class='col-start-1 font-semibold text-2xl'><%= @gallery.title %></span>
+      <% if @gallery.gallery_price != nil and @gallery.gallery_price > 0 %>
+        <span class='col-start-2 flex font-bold text-2xl justify-end'>PHP <%= @gallery.gallery_price %></span>
+      <% end %>
+    </div>    
+  <span class='text-base w-11/12 mt-10'><%= safe_join(@gallery.caption.split("\n"),tag(:br)) %></span>
+  </div>
+  
   <div class='w-11/12 grid grid-cols-3 mx-5 mb-5 gap-5 flex justify-center'>
       <% @gallery.images.each do |image| %>
           <div class='mt-8 w-96 h-auto'>

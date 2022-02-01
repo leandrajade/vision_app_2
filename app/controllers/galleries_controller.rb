@@ -19,7 +19,7 @@ class GalleriesController < ApplicationController
     @gallery = @user.galleries.build
     @images = @user.images.order(created_at: :desc)
   end
-
+  
   # GET /galleries/1/edit
   def edit
     @gallery = Gallery.find(params[:id])
@@ -40,6 +40,7 @@ class GalleriesController < ApplicationController
             :image_id => image_id
           })
         end
+
         format.html { redirect_to user_gallery_path(@user.id, @gallery), notice: "Gallery was successfully created." }
         format.json { render :show, status: :created, location: @gallery }
       else

@@ -26,7 +26,7 @@
               <% end %>
             </li>
           </div>
-          <div class='h-fit flex bg-rose-200 justify-center'>
+          <div class='h-fit w-full flex items-center justify-center'>
             <%= link_to(user_image_path(@user, image)) do %>
               <span class=''><%= image_tag image.img.to_s, :style => 'object-fit:cover; max-width:auto; height:300px' %></span>
             <% end %>

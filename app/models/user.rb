@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
     validates :name, presence: true
     validates :username, presence: true, uniqueness: true
-    # validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
+    validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
     
     has_many :images, dependent: :destroy
     # has_many :gallery_images,  through: :galleries
@@ -26,4 +26,10 @@ class User < ApplicationRecord
     has_many :followings, through: :given_follows, source: :followed_user
 
     mount_uploader :profile_picture, ProfilePictureUploader
+
+  private
+    def set_user_status
+      self.status = 'pending'
+    end
 end
+
